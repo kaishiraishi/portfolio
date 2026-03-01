@@ -46,9 +46,11 @@ export default async function WorkDetailPage({ params }: Props) {
     return (
         <article className="py-20">
             <div className="mb-32">
-                <Link href="/" className="text-[10px] tracking-[0.1em] uppercase text-primary/30 hover:text-primary transition-colors mb-20 inline-block font-extralight">
-                    &larr; Index
-                </Link>
+                <div className="mb-20 border-b border-border pb-10">
+                    <Link href="/" className="text-[10px] tracking-[0.1em] uppercase text-primary/30 hover:text-primary transition-colors inline-block font-extralight">
+                        &larr; Index
+                    </Link>
+                </div>
 
                 {/* Header: Title -> Summary -> Links */}
                 <div className="mb-24">

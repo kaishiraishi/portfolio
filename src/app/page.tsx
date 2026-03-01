@@ -6,6 +6,11 @@ export default function WorksPage() {
 
   return (
     <div className="py-20">
+      <div className="flex justify-between items-end mb-16 border-b border-border pb-10">
+        <span className="text-[10px] uppercase tracking-[0.1em] text-primary/30 font-extralight">Selected Works</span>
+        <span className="text-[10px] uppercase tracking-[0.1em] text-primary/30 font-extralight">Rows: {Math.ceil(works.length / 2)}</span>
+      </div>
+
       {works.length === 0 ? (
         <p className="text-primary/50 font-extralight text-[10px] tracking-[0.1em] uppercase">No works found.</p>
       ) : (
