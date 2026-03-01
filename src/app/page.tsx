@@ -32,20 +32,14 @@ export default function WorksPage() {
               </div>
 
               {/* Info Section */}
-              <div className="p-10 flex flex-col flex-1">
-                <div className="mb-6">
+              <div className="p-8 flex flex-col flex-1">
+                <div className="mb-4">
                   <h2 className="text-3xl font-light tracking-tighter text-primary leading-tight group-hover:opacity-70 transition-opacity">
                     {frontmatter.title}
                     <span className="text-primary/30 ml-4">
                       / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
                     </span>
                   </h2>
-                </div>
-
-                <div className="mb-8">
-                  <span className="text-[10px] uppercase tracking-[0.1em] text-primary/60 font-light border-l border-primary/20 pl-3">
-                    {frontmatter.role}
-                  </span>
                 </div>
 
                 {frontmatter.summary && (

@@ -15,7 +15,7 @@
   --color-primary: var(--primary);
   --color-border: var(--border);
   --color-tertiary: var(--tertiary);
-  --font-sans: "Yu Gothic", "YuGothic", "Yu Gothic UI", "Hiragino Sans", "Meiryo", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  --font-sans: "Helvetica Neue", "Helvetica", "Yu Gothic", "YuGothic", "Yu Gothic UI", "Hiragino Sans", "Meiryo", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
