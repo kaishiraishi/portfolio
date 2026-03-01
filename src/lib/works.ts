@@ -12,6 +12,8 @@ export interface WorkFrontmatter {
   repo?: string;
   demo?: string;
   image?: string;
+  role: string;
+  tech: string[];
 }
 
 export interface Work {

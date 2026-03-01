@@ -46,10 +46,33 @@ export default async function WorkDetailPage({ params }: Props) {
     return (
         <article className="py-20">
             <div className="mb-32">
-                <Link href="/" className="text-[10px] tracking-[0.1em] uppercase text-primary/50 hover:text-primary transition-colors mb-20 inline-block font-extralight">
+                <Link href="/" className="text-[10px] tracking-[0.1em] uppercase text-primary/30 hover:text-primary transition-colors mb-20 inline-block font-extralight">
                     &larr; Index
                 </Link>
-                <h1 className="text-5xl sm:text-7xl font-extralight tracking-tighter mb-16 text-primary leading-[0.9]">{frontmatter.title}</h1>
+
+                {/* Header: Title -> Summary -> Links */}
+                <div className="mb-24">
+                    <h1 className="text-6xl sm:text-8xl font-extralight tracking-tighter mb-10 text-primary leading-[0.85]">{frontmatter.title}</h1>
+
+                    {frontmatter.summary && (
+                        <p className="text-lg sm:text-xl text-primary/70 font-extralight leading-relaxed max-w-2xl mb-12 tracking-tight">
+                            {frontmatter.summary}
+                        </p>
+                    )}
+
+                    <div className="flex gap-10">
+                        {frontmatter.repo && (
+                            <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-70 transition-opacity underline underline-offset-8 decoration-border">
+                                Repository
+                            </a>
+                        )}
+                        {frontmatter.demo && (
+                            <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-70 transition-opacity underline underline-offset-8 decoration-border">
+                                Live Demo
+                            </a>
+                        )}
+                    </div>
+                </div>
 
                 {frontmatter.image && (
                     <div className="mb-24 aspect-[21/9] overflow-hidden border border-border">
@@ -62,31 +85,25 @@ export default async function WorkDetailPage({ params }: Props) {
                 )}
 
                 <div className="max-w-3xl">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-12 sm:gap-20 text-[10px] text-primary/50 mb-20 border-y border-border py-12 uppercase tracking-[0.1em] font-extralight">
-                        {frontmatter.date && (
-                            <div>
-                                <span className="block text-primary/30 mb-3">Released</span>
-                                <span className="text-primary">{new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+                    {/* Meta Block: Role | Tech */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-20 border-y border-border py-12 uppercase tracking-[0.1em] font-extralight">
+                        <div>
+                            <span className="block text-primary/30 text-[10px] mb-4">Role</span>
+                            <span className="text-primary text-sm">{frontmatter.role}</span>
+                        </div>
+                        <div>
+                            <span className="block text-primary/30 text-[10px] mb-4">Tech Stack</span>
+                            <div className="flex flex-wrap gap-x-4 gap-y-2 text-primary text-sm">
+                                {frontmatter.tech.map((t, i) => (
+                                    <span key={t}>
+                                        {t}{i < frontmatter.tech.length - 1 ? "," : ""}
+                                    </span>
+                                ))}
                             </div>
-                        )}
-                        {frontmatter.repo && (
-                            <div>
-                                <span className="block text-primary/30 mb-3">Code</span>
-                                <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-50 transition-opacity underline underline-offset-8 decoration-border">
-                                    GitHub Repository
-                                </a>
-                            </div>
-                        )}
-                        {frontmatter.demo && (
-                            <div>
-                                <span className="block text-primary/30 mb-3">Live</span>
-                                <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-50 transition-opacity underline underline-offset-8 decoration-border">
-                                    View Project
-                                </a>
-                            </div>
-                        )}
+                        </div>
                     </div>
 
+                    {/* MDX Content */}
                     <div className="prose prose-blue max-w-none font-extralight prose-headings:font-extralight prose-headings:tracking-tight prose-headings:text-primary prose-p:font-extralight prose-p:text-primary/70 prose-p:leading-relaxed prose-p:text-lg prose-a:text-primary prose-a:font-extralight prose-a:underline prose-a:underline-offset-8 prose-a:decoration-border hover:prose-a:decoration-primary transition-all">
                         <MDXRemote source={content} />
                     </div>

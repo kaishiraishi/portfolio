@@ -5,48 +5,54 @@ export default function WorksPage() {
   const works = getAllWorks();
 
   return (
-    <div className="py-12">
+    <div className="py-20">
       {works.length === 0 ? (
-        <p className="text-gray-400 font-extralight text-xs tracking-widest uppercase">No works found.</p>
+        <p className="text-primary/50 font-extralight text-[10px] tracking-[0.1em] uppercase">No works found.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
           {works.map(({ slug, frontmatter }) => (
             <Link
               key={slug}
               href={`/works/${slug}`}
-              className="group block border border-gray-100 hover:bg-gray-50 transition-all duration-500 overflow-hidden"
+              className="group block border border-border rounded-none shadow-none hover:bg-primary/[0.02] transition-all duration-500 overflow-hidden flex flex-col"
             >
-              <div className="flex flex-col h-full min-h-[480px]">
-                {/* Image Section */}
-                <div className="flex-1 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out">
-                  {frontmatter.image ? (
-                    <img
-                      src={frontmatter.image}
-                      alt={frontmatter.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out opacity-80 group-hover:opacity-100"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-gray-50 flex items-center justify-center text-gray-100 font-extralight text-8xl">
-                      {frontmatter.title.charAt(0)}
-                    </div>
-                  )}
+              {/* Image (Top) */}
+              <div className="aspect-[4/3] overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                {frontmatter.image ? (
+                  <img
+                    src={frontmatter.image}
+                    alt={frontmatter.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2s] ease-out opacity-90 group-hover:opacity-100"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-white flex items-center justify-center text-primary/10 font-extralight text-8xl">
+                    {frontmatter.title.charAt(0)}
+                  </div>
+                )}
+              </div>
+
+              {/* Info Section */}
+              <div className="p-10 flex flex-col flex-1">
+                <div className="flex justify-between items-baseline mb-6">
+                  <h2 className="text-3xl font-extralight tracking-tighter text-primary leading-tight group-hover:opacity-70 transition-opacity">
+                    {frontmatter.title}
+                  </h2>
+                  <span className="text-[10px] uppercase tracking-[0.1em] text-primary/40 font-extralight">
+                    {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
+                  </span>
                 </div>
 
-                <div className="p-8 space-y-4 border-t border-border group-hover:bg-primary/5 transition-colors">
-                  <div className="flex justify-between items-start">
-                    <h2 className="text-2xl font-extralight tracking-tighter text-primary leading-tight">
-                      {frontmatter.title}
-                    </h2>
-                    <span className="text-[10px] uppercase tracking-[0.1em] text-primary/50 font-extralight">
-                      {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
-                    </span>
-                  </div>
-                  {frontmatter.summary && (
-                    <p className="text-xs text-primary/70 leading-relaxed font-extralight max-w-sm tracking-wide">
-                      {frontmatter.summary}
-                    </p>
-                  )}
+                <div className="mb-8">
+                  <span className="text-[10px] uppercase tracking-[0.1em] text-primary/60 font-extralight border-l border-primary/20 pl-3">
+                    {frontmatter.role}
+                  </span>
                 </div>
+
+                {frontmatter.summary && (
+                  <p className="mt-auto text-xs text-primary/70 leading-relaxed font-extralight max-w-sm tracking-wide line-clamp-2">
+                    {frontmatter.summary}
+                  </p>
+                )}
               </div>
             </Link>
           ))}
