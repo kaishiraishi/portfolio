@@ -5,42 +5,54 @@ export default function WorksPage() {
   const works = getAllWorks();
 
   return (
-    <div className="space-y-24">
-      <section>
-        <h1 className="text-[10px] font-extralight tracking-[0.4em] uppercase mb-16 text-gray-300">Selected Works</h1>
-
-        {works.length === 0 ? (
-          <p className="text-gray-500 font-extralight">No works found.</p>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24">
-            {works.map(({ slug, frontmatter }) => (
-              <Link
-                key={slug}
-                href={`/works/${slug}`}
-                className="group block space-y-6"
-              >
-                <div className="aspect-[4/3] bg-gray-50 overflow-hidden relative border border-gray-100/50">
-                  <div className="absolute inset-0 flex items-center justify-center text-gray-200 font-extralight text-6xl group-hover:scale-105 transition-transform duration-700 ease-out">
-                    {frontmatter.title.charAt(0)}
-                  </div>
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-colors duration-500" />
+    <div className="py-12">
+      {works.length === 0 ? (
+        <p className="text-gray-400 font-extralight text-xs tracking-widest uppercase">No works found.</p>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 border-t border-l border-gray-100">
+          {works.map(({ slug, frontmatter }) => (
+            <Link
+              key={slug}
+              href={`/works/${slug}`}
+              className="group block border-r border-b border-gray-100 hover:bg-gray-50 transition-all duration-500 overflow-hidden"
+            >
+              <div className="flex flex-col h-full min-h-[480px]">
+                {/* Image Section */}
+                <div className="flex-1 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out">
+                  {frontmatter.image ? (
+                    <img
+                      src={frontmatter.image}
+                      alt={frontmatter.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-[1.5s] ease-out opacity-80 group-hover:opacity-100"
+                    />
+                  ) : (
+                    <div className="w-full h-full bg-gray-50 flex items-center justify-center text-gray-100 font-extralight text-8xl">
+                      {frontmatter.title.charAt(0)}
+                    </div>
+                  )}
                 </div>
 
-                <div className="space-y-2">
-                  <h2 className="text-xl font-extralight tracking-tight group-hover:text-gray-600 transition-colors">
-                    {frontmatter.title}
-                  </h2>
+                {/* Info Section */}
+                <div className="p-10 space-y-4 border-t border-gray-100 group-hover:border-gray-200 transition-colors">
+                  <div className="flex justify-between items-start">
+                    <h2 className="text-2xl font-extralight tracking-tighter text-black leading-tight">
+                      {frontmatter.title}
+                    </h2>
+                    <span className="text-[10px] uppercase tracking-[0.4em] text-gray-300 font-extralight">
+                      {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
+                    </span>
+                  </div>
                   {frontmatter.summary && (
-                    <p className="text-xs text-gray-400 leading-relaxed font-extralight tracking-wide line-clamp-2">
+                    <p className="text-xs text-gray-400 leading-relaxed font-extralight max-w-sm tracking-wide">
                       {frontmatter.summary}
                     </p>
                   )}
                 </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </section>
+              </div>
+            </Link>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

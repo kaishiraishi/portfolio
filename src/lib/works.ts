@@ -11,6 +11,7 @@ export interface WorkFrontmatter {
   tags?: string[];
   repo?: string;
   demo?: string;
+  image?: string;
 }
 
 export interface Work {
@@ -26,7 +27,7 @@ export function getAllWorks(): Work[] {
   if (!fs.existsSync(contentDir)) {
     return [];
   }
-  
+
   const files = fs.readdirSync(contentDir);
   const works = files
     .filter((file) => file.endsWith('.mdx'))
@@ -52,14 +53,14 @@ export function getAllWorks(): Work[] {
 
 export function getWorkBySlug(slug: string): WorkDetail | null {
   const filePath = path.join(contentDir, `${slug}.mdx`);
-  
+
   if (!fs.existsSync(filePath)) {
     return null;
   }
-  
+
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
-  
+
   return {
     slug,
     frontmatter: data as WorkFrontmatter,
