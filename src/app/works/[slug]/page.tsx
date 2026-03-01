@@ -46,13 +46,13 @@ export default async function WorkDetailPage({ params }: Props) {
     return (
         <article className="py-20">
             <div className="mb-32">
-                <Link href="/" className="text-[10px] tracking-[0.4em] uppercase text-gray-300 hover:text-black transition-colors mb-20 inline-block font-extralight">
+                <Link href="/" className="text-[10px] tracking-[0.1em] uppercase text-primary/50 hover:text-primary transition-colors mb-20 inline-block font-extralight">
                     &larr; Index
                 </Link>
-                <h1 className="text-5xl sm:text-7xl font-extralight tracking-tighter mb-16 text-black leading-[0.9]">{frontmatter.title}</h1>
+                <h1 className="text-5xl sm:text-7xl font-extralight tracking-tighter mb-16 text-primary leading-[0.9]">{frontmatter.title}</h1>
 
                 {frontmatter.image && (
-                    <div className="mb-24 aspect-[21/9] overflow-hidden border border-gray-100">
+                    <div className="mb-24 aspect-[21/9] overflow-hidden border border-border">
                         <img
                             src={frontmatter.image}
                             alt={frontmatter.title}
@@ -62,32 +62,32 @@ export default async function WorkDetailPage({ params }: Props) {
                 )}
 
                 <div className="max-w-3xl">
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-12 sm:gap-20 text-[10px] text-gray-400 mb-20 border-y border-gray-50 py-12 uppercase tracking-[0.3em] font-extralight">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-12 sm:gap-20 text-[10px] text-primary/50 mb-20 border-y border-border py-12 uppercase tracking-[0.1em] font-extralight">
                         {frontmatter.date && (
                             <div>
-                                <span className="block text-gray-200 mb-3">Released</span>
-                                <span className="text-black">{new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+                                <span className="block text-primary/30 mb-3">Released</span>
+                                <span className="text-primary">{new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
                             </div>
                         )}
                         {frontmatter.repo && (
                             <div>
-                                <span className="block text-gray-200 mb-3">Code</span>
-                                <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-400 transition-colors underline underline-offset-8 decoration-gray-100">
+                                <span className="block text-primary/30 mb-3">Code</span>
+                                <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-50 transition-opacity underline underline-offset-8 decoration-border">
                                     GitHub Repository
                                 </a>
                             </div>
                         )}
                         {frontmatter.demo && (
                             <div>
-                                <span className="block text-gray-200 mb-3">Live</span>
-                                <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-400 transition-colors underline underline-offset-8 decoration-gray-100">
+                                <span className="block text-primary/30 mb-3">Live</span>
+                                <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-primary hover:opacity-50 transition-opacity underline underline-offset-8 decoration-border">
                                     View Project
                                 </a>
                             </div>
                         )}
                     </div>
 
-                    <div className="prose prose-gray max-w-none prose-headings:font-extralight prose-headings:tracking-tight prose-headings:text-black prose-p:font-extralight prose-p:text-gray-600 prose-p:leading-relaxed prose-p:text-lg prose-a:text-black prose-a:font-extralight prose-a:underline prose-a:underline-offset-8 prose-a:decoration-gray-100 hover:prose-a:decoration-black transition-all">
+                    <div className="prose prose-blue max-w-none font-extralight prose-headings:font-extralight prose-headings:tracking-tight prose-headings:text-primary prose-p:font-extralight prose-p:text-primary/70 prose-p:leading-relaxed prose-p:text-lg prose-a:text-primary prose-a:font-extralight prose-a:underline prose-a:underline-offset-8 prose-a:decoration-border hover:prose-a:decoration-primary transition-all">
                         <MDXRemote source={content} />
                     </div>
                 </div>
