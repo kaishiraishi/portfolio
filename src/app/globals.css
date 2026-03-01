@@ -15,14 +15,17 @@
   --color-primary: var(--primary);
   --color-border: var(--border);
   --color-tertiary: var(--tertiary);
-  --font-sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: "Yu Gothic", "YuGothic", "Yu Gothic UI", "Hiragino Sans", "Meiryo", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
-
-
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.8;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }

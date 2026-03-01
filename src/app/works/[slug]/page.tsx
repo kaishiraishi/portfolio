@@ -44,32 +44,31 @@ export default async function WorkDetailPage({ params }: Props) {
     const { frontmatter, content } = work;
 
     return (
-        <article className="py-20">
+        <article className="pt-8 pb-20">
             <div className="mb-32">
-                <div className="mb-20 border-b border-border pb-10">
-                    <Link href="/" className="text-[10px] tracking-[0.1em] uppercase text-primary/30 hover:text-primary transition-colors inline-block font-extralight">
-                        &larr; Index
-                    </Link>
-                </div>
-
                 {/* Header: Title -> Summary -> Links */}
-                <div className="mb-24">
-                    <h1 className="text-6xl sm:text-8xl font-extralight tracking-tighter mb-10 text-primary leading-[0.85]">{frontmatter.title}</h1>
+                <div className="mb-14">
+                    <h1 className="text-6xl sm:text-8xl font-light tracking-tighter mb-10 text-primary leading-[0.85]">
+                        {frontmatter.title}
+                        <span className="text-primary/20 ml-6 sm:ml-10">
+                            / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
+                        </span>
+                    </h1>
 
                     {frontmatter.summary && (
-                        <p className="text-lg sm:text-xl text-primary/70 font-extralight leading-relaxed max-w-2xl mb-12 tracking-tight">
+                        <p className="text-lg sm:text-xl text-primary/70 font-light leading-relaxed max-w-2xl mb-12 tracking-tight">
                             {frontmatter.summary}
                         </p>
                     )}
 
                     <div className="flex gap-10">
                         {frontmatter.repo && (
-                            <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-70 transition-opacity underline underline-offset-8 decoration-border">
+                            <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-70 transition-opacity underline underline-offset-8 decoration-border font-light">
                                 Repository
                             </a>
                         )}
                         {frontmatter.demo && (
-                            <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-70 transition-opacity underline underline-offset-8 decoration-border">
+                            <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-70 transition-opacity underline underline-offset-8 decoration-border font-light">
                                 Live Demo
                             </a>
                         )}
@@ -88,7 +87,7 @@ export default async function WorkDetailPage({ params }: Props) {
 
                 <div className="max-w-3xl">
                     {/* Meta Block: Role | Tech */}
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-20 border-y border-border py-12 uppercase tracking-[0.1em] font-extralight">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-20 border-y border-border py-12 uppercase tracking-[0.1em] font-light">
                         <div>
                             <span className="block text-primary/30 text-[10px] mb-4">Role</span>
                             <span className="text-primary text-sm">{frontmatter.role}</span>
@@ -106,7 +105,7 @@ export default async function WorkDetailPage({ params }: Props) {
                     </div>
 
                     {/* MDX Content */}
-                    <div className="prose prose-blue max-w-none font-extralight prose-headings:font-extralight prose-headings:tracking-tight prose-headings:text-primary prose-p:font-extralight prose-p:text-primary/70 prose-p:leading-relaxed prose-p:text-lg prose-a:text-primary prose-a:font-extralight prose-a:underline prose-a:underline-offset-8 prose-a:decoration-border hover:prose-a:decoration-primary transition-all">
+                    <div className="prose prose-blue max-w-none font-light prose-headings:font-light prose-headings:tracking-tight prose-headings:text-primary prose-p:font-light prose-p:text-primary/70 prose-p:leading-relaxed prose-p:text-lg prose-a:text-primary prose-a:font-light prose-a:underline prose-a:underline-offset-8 prose-a:decoration-border hover:prose-a:decoration-primary transition-all">
                         <MDXRemote source={content} />
                     </div>
                 </div>
