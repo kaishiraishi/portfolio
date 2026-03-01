@@ -44,39 +44,40 @@ export default async function WorkDetailPage({ params }: Props) {
     const { frontmatter, content } = work;
 
     return (
-        <article className="max-w-prose mx-auto py-8">
-            <div className="mb-8">
-                <Link href="/" className="text-gray-500 hover:text-black transition-colors text-sm mb-6 inline-block">
-                    &larr; Back to Works
+        <article className="max-w-3xl mx-auto py-16">
+            <div className="mb-24">
+                <Link href="/" className="text-[10px] tracking-[0.3em] uppercase text-gray-300 hover:text-black transition-colors mb-16 inline-block font-extralight">
+                    &larr; Index
                 </Link>
-                <h1 className="text-4xl font-extrabold tracking-tight mt-2 mb-4">{frontmatter.title}</h1>
-                {frontmatter.date && (
-                    <p className="text-gray-500 mb-4">{new Date(frontmatter.date).toLocaleDateString()}</p>
-                )}
-                {frontmatter.tags && frontmatter.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mb-6">
-                        {frontmatter.tags.map((tag) => (
-                            <span key={tag} className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full">
-                                {tag}
-                            </span>
-                        ))}
-                    </div>
-                )}
-                <div className="flex gap-4 mb-8">
+                <h1 className="text-6xl font-extralight tracking-tighter mb-10 text-black leading-tight">{frontmatter.title}</h1>
+
+                <div className="flex flex-col sm:flex-row sm:items-center gap-8 sm:gap-16 text-[10px] text-gray-400 mb-12 border-y border-gray-50 py-10 uppercase tracking-[0.2em] font-extralight">
+                    {frontmatter.date && (
+                        <div>
+                            <span className="block text-gray-200 mb-2">Released</span>
+                            <span className="text-black">{new Date(frontmatter.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}</span>
+                        </div>
+                    )}
                     {frontmatter.repo && (
-                        <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                            GitHub Repo
-                        </a>
+                        <div>
+                            <span className="block text-gray-200 mb-2">Code</span>
+                            <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-500 transition-colors">
+                                GitHub Repository
+                            </a>
+                        </div>
                     )}
                     {frontmatter.demo && (
-                        <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
-                            Live Demo
-                        </a>
+                        <div>
+                            <span className="block text-gray-200 mb-2">Live</span>
+                            <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer" className="text-black hover:text-gray-500 transition-colors">
+                                View Project
+                            </a>
+                        </div>
                     )}
                 </div>
-                <hr className="border-gray-200" />
             </div>
-            <div className="prose prose-gray max-w-none">
+
+            <div className="prose prose-gray max-w-none prose-headings:font-extralight prose-headings:tracking-tight prose-headings:text-black prose-p:font-extralight prose-p:text-gray-600 prose-p:leading-relaxed prose-a:text-black prose-a:font-extralight prose-a:underline prose-a:underline-offset-4 prose-a:decoration-gray-200 hover:prose-a:decoration-black transition-all">
                 <MDXRemote source={content} />
             </div>
         </article>
