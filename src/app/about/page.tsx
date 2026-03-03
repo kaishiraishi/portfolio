@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Metadata } from "next";
+import AsciiVideo from "@/components/AsciiVideo";
 
 export const metadata: Metadata = {
     title: "About | Portfolio",
@@ -12,6 +13,11 @@ export default function AboutPage() {
                 &larr; Index
             </Link>
             <h1 className="text-5xl font-extralight tracking-tighter mb-12 text-black">About</h1>
+
+            <div className="mb-12">
+                <AsciiVideo src="/video.mp4" width={640} height={480} />
+            </div>
+
             <div className="prose prose-gray prose-p:font-extralight prose-p:text-gray-600 prose-p:leading-relaxed prose-p:text-lg">
                 <p>
                     I am a designer and developer focused on minimal and functional digital aesthetics.
