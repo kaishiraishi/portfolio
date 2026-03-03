@@ -9,7 +9,7 @@ interface WorksListProps {
 }
 
 export default function WorksList({ works }: WorksListProps) {
-    const [hoveredImage, setHoveredImage] = useState<string | null>(null);
+    const [hoveredWork, setHoveredWork] = useState<Work | null>(null);
 
     return (
         <div className="relative min-h-[60vh]">
@@ -18,7 +18,7 @@ export default function WorksList({ works }: WorksListProps) {
                 {works.map((work) => (
                     <div
                         key={work.slug}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${hoveredImage === work.frontmatter.image ? "opacity-30" : "opacity-0"
+                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${hoveredWork?.slug === work.slug ? "opacity-30" : "opacity-0"
                             }`}
                     >
                         {work.frontmatter.image && (
@@ -31,30 +31,45 @@ export default function WorksList({ works }: WorksListProps) {
                     </div>
                 ))}
                 {/* Subtle overlay to maintain text readability */}
-                <div className={`absolute inset-0 bg-white/40 transition-opacity duration-700 ${hoveredImage ? "opacity-100" : "opacity-0"}`} />
+                <div className={`absolute inset-0 bg-white/40 transition-opacity duration-700 ${hoveredWork ? "opacity-100" : "opacity-0"}`} />
             </div>
 
             {works.length === 0 ? (
                 <p className="relative z-10 text-primary/50 font-light text-[10px] tracking-[0.1em] uppercase">No works found.</p>
             ) : (
-                <nav className="relative z-10 flex flex-col md:ml-[50%] space-y-4">
-                    {works.map(({ slug, frontmatter }) => (
-                        <Link
-                            key={slug}
-                            href={`/works/${slug}`}
-                            className="group inline-block w-fit"
-                            onMouseEnter={() => setHoveredImage(frontmatter.image || null)}
-                            onMouseLeave={() => setHoveredImage(null)}
+                <div className="relative z-10 grid grid-cols-8 gap-4">
+                    {/* Nav occupies left 4 columns (col 1-4) */}
+                    <nav className="col-span-8 md:col-span-4 flex flex-col" style={{ gap: '16px' }}>
+                        {works.map((work) => (
+                            <Link
+                                key={work.slug}
+                                href={`/works/${work.slug}`}
+                                className="group inline-block w-fit"
+                                onMouseEnter={() => setHoveredWork(work)}
+                                onMouseLeave={() => setHoveredWork(null)}
+                            >
+                                <h2 className="text-4xl sm:text-5xl font-light tracking-tighter text-primary group-hover:pl-4 transition-all duration-500 ease-out" style={{ lineHeight: '64px' }}>
+                                    {work.frontmatter.title}
+                                    <span className="text-primary/20 ml-4 inline-block transform translate-y-[-0.2em] text-lg sm:text-xl font-extralight">
+                                        / {work.frontmatter.date ? new Date(work.frontmatter.date).getFullYear() : '—'}
+                                    </span>
+                                </h2>
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Summary display in bottom right (col 6-8) */}
+                    <div className="hidden md:block col-start-6 col-span-3 self-end">
+                        <div
+                            className={`transition-all duration-500 ease-out ${hoveredWork ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+                            style={{ paddingBottom: '32px' }}
                         >
-                            <h2 className="text-4xl sm:text-5xl font-light tracking-tighter text-primary leading-none group-hover:pl-4 transition-all duration-500 ease-out">
-                                {frontmatter.title}
-                                <span className="text-primary/20 ml-4 inline-block transform translate-y-[-0.2em] text-lg sm:text-xl font-extralight">
-                                    / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
-                                </span>
-                            </h2>
-                        </Link>
-                    ))}
-                </nav>
+                            <p className="text-primary text-sm font-light leading-relaxed text-left tracking-tight">
+                                {hoveredWork?.frontmatter.summary}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             )}
         </div>
     );

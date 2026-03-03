@@ -5,7 +5,7 @@ export default function WorksPage() {
   const works = getAllWorks();
 
   return (
-    <div className="pt-32 pb-40">
+    <div className="pt-32 pb-32">
       <WorksList works={works} />
     </div>
   );

@@ -2,11 +2,26 @@
 @plugin "@tailwindcss/typography";
 
 :root {
+  /* ─ Color tokens ─ */
   --background: #ffffff;
   --foreground: #0027ff;
   --primary: #0027ff;
   --border: #e6e6e6;
   --tertiary: #999999;
+
+  /* ─ Grid tokens ─ */
+  --grid-columns: 8;
+  --gutter: 16px;
+  --row: 32px;
+  --margin-desktop: 72px;
+  --margin-tablet: 32px;
+  --margin-mobile: 16px;
+  --max-width: 1152px;
+
+  /* ─ Grid line style ─ */
+  --grid-line-color: rgba(0, 0, 0, 0.04);
+  --grid-fill-color: transparent;
+  --baseline-pitch: 128px;
 }
 
 @theme inline {
@@ -15,16 +30,19 @@
   --color-primary: var(--primary);
   --color-border: var(--border);
   --color-tertiary: var(--tertiary);
-  --font-sans: "Helvetica Neue", "Helvetica", "Yu Gothic", "YuGothic", "Yu Gothic UI", "Hiragino Sans", "Meiryo", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+  --font-sans: var(--font-inter), var(--font-noto-jp), system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
 body {
   background: var(--background);
+  background-image: linear-gradient(to bottom, var(--grid-line-color) 1px, transparent 1px);
+  background-size: 100% var(--baseline-pitch);
   color: var(--foreground);
   font-family: var(--font-sans);
-  font-weight: 300;
-  line-height: 1.8;
+  font-weight: 200;
+  line-height: var(--row);
+  /* 32px = 1 grid row */
   letter-spacing: 0.01em;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
