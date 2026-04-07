@@ -1,19 +1,13 @@
 import { getAllWorks } from "@/lib/works";
 import WorksList from "@/components/WorksList";
-import AsciiVideo from "@/components/AsciiVideo";
 
 export default function WorksPage() {
   const works = getAllWorks();
 
   return (
-    <div>
-      {/* ─ Hero: ASCII video ─ */}
-      <section className="w-full min-h-screen flex items-center justify-center">
-        <AsciiVideo src="/video.mp4" width={1280} height={720} />
-      </section>
-
+    <div className="h-[calc(100vh-160px)] flex items-center overflow-hidden -mt-8">
       {/* ─ Works list ─ */}
-      <div className="pt-32 pb-32">
+      <div className="w-full">
         <WorksList works={works} />
       </div>
     </div>

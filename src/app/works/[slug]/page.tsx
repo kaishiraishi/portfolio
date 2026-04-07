@@ -1,7 +1,7 @@
 import { getWorkBySlug, getAllWorks } from "@/lib/works";
 import { notFound } from "next/navigation";
+import ImageGallery from "@/components/ImageGallery";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import Link from "next/link";
 import { Metadata } from "next";
 
 interface Props {
@@ -44,75 +44,90 @@ export default async function WorkDetailPage({ params }: Props) {
     const { frontmatter, content } = work;
 
     return (
-        <article className="pt-8 pb-0">
-            <div className="grid grid-cols-8 gap-4">
-                {/* ── Text header: col 1-8 ── */}
-                <div className="col-span-8 mb-8">
-                    <h1 className="text-6xl sm:text-8xl font-light tracking-tighter mb-4 text-primary leading-[0.85]">
-                        {frontmatter.title}
-                        <span className="text-primary/20 ml-6 sm:ml-10">
-                            / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
-                        </span>
-                    </h1>
+        <article className="max-w-[1152px] mx-auto px-4 md:px-8 py-20 font-extralight text-primary">
+            <div className="grid grid-cols-8 gap-x-12 gap-y-24">
+                {/* ─ Left: Visuals Row/Col ─ */}
+                <div className="col-span-8 lg:col-span-5 space-y-16">
+                    <ImageGallery 
+                        mainImage={frontmatter.image}
+                        mainImageCaption={frontmatter.imageCaption}
+                        images={frontmatter.images}
+                    />
 
-                    <div className="flex gap-8 items-baseline mt-6">
-                        {frontmatter.role && (
-                            <span className="text-[10px] uppercase tracking-[0.1em] text-primary/40 font-light">
-                                {frontmatter.role}
-                            </span>
-                        )}
-                        {frontmatter.repo && (
-                            <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer"
-                                className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-50 transition-opacity underline underline-offset-8 decoration-border font-light">
-                                Repository
-                            </a>
-                        )}
-                        {frontmatter.demo && (
-                            <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer"
-                                className="text-[10px] uppercase tracking-[0.1em] text-primary hover:opacity-50 transition-opacity underline underline-offset-8 decoration-border font-light">
-                                Live Demo
-                            </a>
-                        )}
-                    </div>
+                    {/* YouTube Embed */}
+                    {frontmatter.youtubeId && (
+                        <div className="w-full aspect-video bg-black relative">
+                            <iframe
+                                src={`https://www.youtube.com/embed/${frontmatter.youtubeId}`}
+                                className="w-full h-full border-none"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                allowFullScreen
+                            ></iframe>
+                        </div>
+                    )}
                 </div>
 
-                {/* ── Full-width image: col 1-8 ── */}
-                {frontmatter.image && (
-                    <div className="col-span-8 w-full" style={{ height: 'calc(100vh - 220px)' }}>
-                        <img
-                            src={frontmatter.image}
-                            alt={frontmatter.title}
-                            className="w-full h-full object-cover"
-                        />
+                {/* ─ Right: Information ─ */}
+                <div className="col-span-8 lg:col-span-3 lg:sticky lg:top-12 h-fit">
+                    {/* Header */}
+                    <div className="mb-12">
+                        <h1 className="text-3xl sm:text-4xl font-light tracking-tight mb-2 leading-none">
+                            {frontmatter.title}
+                            <span className="text-[#999999] opacity-80 ml-4 inline-block transform translate-y-[-0.1em] text-xl sm:text-2xl font-extralight">
+                                / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
+                            </span>
+                        </h1>
                     </div>
-                )}
 
-                {/* ── Content: col 1-7 (giving some air on the right) ── */}
-                <div className="col-span-8 lg:col-span-7 pt-16 pb-32">
-                    {frontmatter.summary && (
-                        <p className="text-lg text-primary/60 font-light leading-relaxed mb-16 tracking-tight">
-                            {frontmatter.summary}
-                        </p>
+                    <div className="border-t border-primary/20 pt-8 mb-12 space-y-6">
+                        {/* Metadata Rows */}
+                        <div className="grid grid-cols-3 gap-4 text-sm">
+                            <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Member</div>
+                            <div className="col-span-2 text-primary">{frontmatter.members || '1'}</div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 text-sm">
+                            <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Category</div>
+                            <div className="col-span-2 text-primary">{frontmatter.category || '—'}</div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 text-sm">
+                            <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Role</div>
+                            <div className="col-span-2 text-primary font-normal">{frontmatter.role}</div>
+                        </div>
+                        <div className="grid grid-cols-3 gap-4 text-sm">
+                            <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Awards</div>
+                            <div className="col-span-2 text-primary font-light">{frontmatter.achievements || '—'}</div>
+                        </div>
+                    </div>
+
+                    {/* External Links */}
+                    {(frontmatter.repo || frontmatter.demo) && (
+                        <div className="flex gap-12 mb-16 border-b border-primary/10 pb-8">
+                            {frontmatter.repo && (
+                                <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer"
+                                    className="text-xs uppercase tracking-[0.2em] opacity-100 hover:opacity-50 transition-opacity underline underline-offset-8">
+                                    Repository
+                                </a>
+                            )}
+                            {frontmatter.demo && (
+                                <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer"
+                                    className="text-xs uppercase tracking-[0.2em] opacity-100 hover:opacity-50 transition-opacity underline underline-offset-8">
+                                    Live Demo
+                                </a>
+                            )}
+                        </div>
                     )}
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-12 mb-20 uppercase tracking-[0.1em] font-light text-sm">
-                        <div>
-                            <span className="block text-primary/30 text-[10px] mb-4">Role</span>
-                            <span className="text-primary">{frontmatter.role}</span>
-                        </div>
-                        <div>
-                            <span className="block text-primary/30 text-[10px] mb-4">Tech Stack</span>
-                            <div className="flex flex-wrap gap-x-4 gap-y-2 text-primary">
-                                {frontmatter.tech.map((t, i) => (
-                                    <span key={t}>{t}{i < frontmatter.tech.length - 1 ? "," : ""}</span>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="prose prose-blue max-w-none font-light prose-headings:font-light prose-headings:tracking-tight prose-headings:text-primary prose-p:font-light prose-p:text-primary/70 prose-p:leading-relaxed prose-p:text-lg prose-a:text-primary prose-a:underline prose-a:underline-offset-8 prose-a:decoration-border">
+                    {/* Main Description (Japanese) */}
+                    <div className="prose max-w-none font-light prose-headings:font-normal prose-headings:text-[#777777] prose-h2:text-xl prose-h2:tracking-wider prose-h2:mt-12 prose-h2:mb-4 prose-h2:border-b prose-h2:border-[#777777]/20 prose-h2:pb-2 prose-p:text-[#777777] prose-p:leading-relaxed prose-p:text-sm prose-p:mt-4 prose-p:mb-10 prose-strong:text-[#777777] prose-strong:font-normal prose-ul:text-[#777777] prose-li:text-[#777777]">
                         <MDXRemote source={content} />
                     </div>
+
+                    {/* English Description */}
+                    {frontmatter.engDescription && (
+                        <div className="mt-16 pt-12 border-t border-primary/20 text-sm leading-relaxed opacity-60 font-light">
+                            <p className="whitespace-pre-line leading-relaxed">{frontmatter.engDescription}</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </article>

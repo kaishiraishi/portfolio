@@ -12,8 +12,15 @@ export interface WorkFrontmatter {
   repo?: string;
   demo?: string;
   image?: string;
+  imageCaption?: string;
+  images?: any[]; // Supports both `string` or `{src: string, caption?: string}`
+  youtubeId?: string;
   role: string;
   tech: string[];
+  members?: string;
+  category?: string;
+  achievements?: string;
+  engDescription?: string;
 }
 
 export interface Work {

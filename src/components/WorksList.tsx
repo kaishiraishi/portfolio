@@ -18,7 +18,7 @@ export default function WorksList({ works }: WorksListProps) {
                 {works.map((work) => (
                     <div
                         key={work.slug}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${hoveredWork?.slug === work.slug ? "opacity-30" : "opacity-0"
+                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${hoveredWork?.slug === work.slug ? "opacity-60" : "opacity-0"
                             }`}
                     >
                         {work.frontmatter.image && (
@@ -31,7 +31,7 @@ export default function WorksList({ works }: WorksListProps) {
                     </div>
                 ))}
                 {/* Subtle overlay to maintain text readability */}
-                <div className={`absolute inset-0 bg-white/40 transition-opacity duration-700 ${hoveredWork ? "opacity-100" : "opacity-0"}`} />
+                <div className={`absolute inset-0 bg-white/20 transition-opacity duration-700 ${hoveredWork ? "opacity-100" : "opacity-0"}`} />
             </div>
 
             {works.length === 0 ? (
@@ -48,9 +48,18 @@ export default function WorksList({ works }: WorksListProps) {
                                 onMouseEnter={() => setHoveredWork(work)}
                                 onMouseLeave={() => setHoveredWork(null)}
                             >
-                                <h2 className="text-4xl sm:text-5xl font-light tracking-tighter text-primary group-hover:pl-4 transition-all duration-500 ease-out" style={{ lineHeight: '64px' }}>
+                                <h2 
+                                    className={`text-4xl sm:text-5xl font-light tracking-tighter group-hover:pl-4 transition-all duration-500 ease-out ${
+                                        hoveredWork && hoveredWork.slug !== work.slug ? 'text-black/30' : 'text-primary'
+                                    }`} 
+                                    style={{ lineHeight: '64px' }}
+                                >
                                     {work.frontmatter.title}
-                                    <span className="text-primary/20 ml-4 inline-block transform translate-y-[-0.2em] text-lg sm:text-xl font-extralight">
+                                    <span 
+                                        className={`ml-4 inline-block transform translate-y-[-0.2em] text-lg sm:text-xl font-extralight transition-all duration-500 ease-out ${
+                                            hoveredWork && hoveredWork.slug !== work.slug ? 'text-black/30 opacity-100' : 'text-[#0027ff] opacity-40'
+                                        }`}
+                                    >
                                         / {work.frontmatter.date ? new Date(work.frontmatter.date).getFullYear() : '—'}
                                     </span>
                                 </h2>

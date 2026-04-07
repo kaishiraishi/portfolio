@@ -4,7 +4,7 @@ export default function GridOverlay() {
     return (
         <div
             className="fixed inset-0 pointer-events-none overflow-hidden"
-            style={{ zIndex: 9999 }}
+            style={{ zIndex: -1 }}
             aria-hidden="true"
         >
             {/* 8-column vertical guides — uses CSS tokens from globals.css */}

@@ -15,8 +15,7 @@ const CHARS =
   "@#S%?*+;:,. " +
   "MBÆ&WNQR$HDK0OPY568T4EA93Z72X1UCGLJIVFt" +
   "fmwqpdbkhaoeuisnryzxcvjl![]{}()/|\\-_~<>^`'\"";
-const CELL = 10;
-const FONT_SIZE = 12;
+const CELL = 6;
 const MIRROR = true;
 const GAMMA = 1.0;
 const BRIGHTNESS_LEVELS = 0; // 0 = オフ
@@ -95,7 +94,8 @@ export default function AsciiVideo({
       ctx.fillRect(0, 0, w, h);
 
       // ─ テキスト設定 ─
-      ctx.font = `${FONT_SIZE}px monospace`;
+      const fontSize = CELL * 1.2;
+      ctx.font = `${fontSize}px monospace`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
 
@@ -187,7 +187,7 @@ export default function AsciiVideo({
     BRIGHTNESS_LEVELS > 1 ? String(BRIGHTNESS_LEVELS) : "off";
 
   return (
-    <div className="flex flex-col items-start gap-2">
+    <div className="flex flex-col items-start gap-2 w-full">
       {/* 非表示の動画要素（src は useEffect 内で JS から設定） */}
       <video
         ref={videoRef}
