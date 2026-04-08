@@ -29,6 +29,25 @@ export default function AboutPage() {
                             <p>インタフェースデザインスタジオ</p>
                             <p>データサイエンス副専攻</p>
                         </div>
+
+                        {/* ─ Awards ─ */}
+                        <section className="pt-4">
+
+                            <ul className="space-y-3">
+                                <li>
+                                    <div className="text-sm">WIRED CREATIVE HACK AWARD</div>
+                                    <div className="text-xs opacity-60">Finalist</div>
+                                </li>
+                                <li>
+                                    <div className="text-sm">PLATEAU AWARD</div>
+                                    <div className="text-xs opacity-60">奨励賞</div>
+                                </li>
+                                <li>
+                                    <div className="text-sm">ENTRE BLOOM</div>
+                                    <div className="text-xs opacity-60">最優秀賞</div>
+                                </li>
+                            </ul>
+                        </section>
                     </div>
                 </header>
 
@@ -51,16 +70,16 @@ export default function AboutPage() {
                             どんなに技術が進歩しても、人を最後に突き動かすのは鼻腔を抜ける空気・風の肌触りや、鼓動のリズムといった根源的な体験だと私は考えます。だからこそ机上の設計図だけで作品を語らず、足で歩き、手で触れ、心で “揺らぎ” を捕まえる。そこで得た温度を、プログラムとピクセルで再構成し、ワクワクさせるデジタルな体験へ<span className="whitespace-nowrap">昇華させます。</span>
                         </p>
                         <p>
-                            私が目指すのは、アルゴリズムが正解を提示して体験を最適化し、迷いや偶然を消し去ることではありません。進歩した技術を使って世界の解像度だけを上げ、可能性をそっと照らしながら、最後の意思決定は身体と直感に委ねたい。偶然が起きうる余白を守る——そんなテクノロジーのあり方を、作品として探求しています。
+                            私が目指すのは、アルゴリズムが正解を提示して体験を最適化し、迷いや偶然を消し去ることではありません。進歩した技術を使って世界の解像度だけを上げ、可能性をそっと照らしながら、最後の意思決定は身体と直感に委ねたい。偶然が起きうる余白を守る—そんなテクノロジーのあり方を探求しています。
                         </p>
                     </div>
                 </section>
 
 
 
-                {/* ─ Hobby & Awards ─ */}
-                <div className="col-span-8 grid grid-cols-8 gap-x-4 gap-y-24 mt-12">
-                    <section className="col-span-8 md:col-span-4">
+                {/* ─ Hobby ─ */}
+                <div className="col-span-8 mt-12">
+                    <section className="max-w-[480px]">
                         <h2 className="text-xs tracking-[0.3em] uppercase mb-12 opacity-70">Hobby</h2>
                         <div className="space-y-12">
                             <div className="space-y-3">
@@ -82,27 +101,6 @@ export default function AboutPage() {
                                 </p>
                             </div>
                         </div>
-                    </section>
-
-                    <section className="col-span-8 md:col-span-4">
-                        <h2 className="text-xs tracking-[0.3em] uppercase mb-12 opacity-70">Awards</h2>
-                        <ul className="space-y-8">
-                            <li className="group">
-                                <div className="text-[10px] opacity-40 mb-1">2025</div>
-                                <div className="text-xl">WIRED CREATIVE HACK AWARD</div>
-                                <div className="text-sm opacity-60 italic">Finalist</div>
-                            </li>
-                            <li className="group">
-                                <div className="text-[10px] opacity-40 mb-1">2025</div>
-                                <div className="text-xl">PLATEAU AWARD</div>
-                                <div className="text-sm opacity-60 italic">奨励賞</div>
-                            </li>
-                            <li className="group border-t border-primary/10 pt-8">
-                                <div className="text-[10px] opacity-40 mb-1">2024</div>
-                                <div className="text-xl">TMU ENTRE BLOOM</div>
-                                <div className="text-sm opacity-60 italic">都立大 最優秀賞</div>
-                            </li>
-                        </ul>
                     </section>
                 </div>
             </div>
