@@ -20,6 +20,7 @@ export interface WorkFrontmatter {
   members?: string;
   category?: string;
   achievements?: string;
+  awards?: string;
   engDescription?: string;
 }
 
