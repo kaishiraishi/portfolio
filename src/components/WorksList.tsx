@@ -67,8 +67,8 @@ export default function WorksList({ works }: WorksListProps) {
                                 >
                                     {work.frontmatter.title}
                                     <span 
-                                        className={`ml-4 inline-block transform translate-y-[-0.2em] text-lg sm:text-xl font-extralight transition-all duration-500 ease-out ${
-                                            hoveredWork && hoveredWork.slug !== work.slug ? 'text-black/30 opacity-100' : 'text-[#0027ff] opacity-40'
+                                        className={`text-[#999999] opacity-80 ml-4 inline-block transform translate-y-[-0.1em] text-xl sm:text-2xl font-extralight tracking-tighter transition-all duration-500 ease-out ${
+                                            hoveredWork && hoveredWork.slug !== work.slug ? 'text-black/30' : ''
                                         }`}
                                     >
                                         / {work.frontmatter.date ? new Date(work.frontmatter.date).getFullYear() : '—'}

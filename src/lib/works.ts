@@ -104,11 +104,14 @@ export function getWorkBySlug(slug: string): WorkDetail | null {
     autoImages = autoImages.filter(img => img !== data.image);
   }
 
-  // Merge discovered images with any explicitly defined images, preferring discovered.
-  // We can just set it as the primary array.
-  if (autoImages.length > 0) {
-    data.images = autoImages;
-  }
+  // Merge discovered images with explicitly defined images in MDX.
+  // MDX defined images take precedence in order and metadata (alt/caption).
+  let mdImages: any[] = Array.isArray(data.images) ? data.images : [];
+  const mdImageSrcs = mdImages.map(img => (typeof img === 'string' ? img : img.src));
+  
+  const additionalImages = autoImages.filter(src => !mdImageSrcs.includes(src));
+  
+  data.images = [...mdImages, ...additionalImages];
 
   return {
     slug,

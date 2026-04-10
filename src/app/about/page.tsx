@@ -54,7 +54,7 @@ export default function AboutPage() {
                 {/* ─ Visual ─ */}
                 <div className="col-span-8 md:col-span-3 md:col-start-6">
                     <ImageGallery
-                        images={[{ src: "/About.jpg", caption: "" }]}
+                        images={[{ src: "/image/About/About.jpg", caption: "" }]}
                         imageClassName="opacity-90 group-hover:opacity-100 transition-all duration-700"
                     />
                 </div>

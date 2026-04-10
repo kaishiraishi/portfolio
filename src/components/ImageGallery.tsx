@@ -5,6 +5,7 @@ import { useState, useEffect, useCallback } from "react";
 export type ImageItem = {
     src: string;
     caption?: string;
+    alt?: string;
 };
 
 interface ImageGalleryProps {
@@ -27,7 +28,7 @@ export default function ImageGallery({ mainImage, mainImageCaption, images = [],
         if (typeof img === "string") {
             allImages.push({ src: img });
         } else {
-            allImages.push({ src: img.src, caption: img.caption });
+            allImages.push({ src: img.src, caption: img.caption, alt: img.alt });
         }
     });
 
@@ -78,7 +79,7 @@ export default function ImageGallery({ mainImage, mainImageCaption, images = [],
                             ) : (
                                 <img
                                     src={img.src}
-                                    alt={img.caption || `Image ${i + 1}`}
+                                    alt={img.alt || img.caption || `Image ${i + 1}`}
                                     className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
                                 />
                             )}
