@@ -66,11 +66,22 @@ export default function ImageGallery({ mainImage, mainImageCaption, images = [],
                             onClick={() => setLightboxIndex(i)}
                             className="relative w-full outline-none cursor-zoom-in group flex-shrink-0 bg-transparent flex items-center justify-center"
                         >
-                            <img
-                                src={img.src}
-                                alt={img.caption || `Image ${i + 1}`}
-                                className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
-                            />
+                            {/\.(mp4|webm)$/i.test(img.src) ? (
+                                <video
+                                    src={img.src}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
+                                />
+                            ) : (
+                                <img
+                                    src={img.src}
+                                    alt={img.caption || `Image ${i + 1}`}
+                                    className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
+                                />
+                            )}
                         </button>
                         {/* Static Caption (Normal View) */}
                         {img.caption && (
@@ -123,11 +134,22 @@ export default function ImageGallery({ mainImage, mainImageCaption, images = [],
 
                     {/* Image and Caption Container */}
                     <div className="flex flex-col items-start justify-center max-w-[85vw] md:max-w-5xl">
-                        <img 
-                            src={currentImg.src} 
-                            alt={currentImg.caption || "Lightbox full view"}
-                            className="w-auto h-auto max-h-[75vh] object-contain shadow-2xl"
-                        />
+                        {/\.(mp4|webm)$/i.test(currentImg.src) ? (
+                            <video 
+                                src={currentImg.src} 
+                                autoPlay
+                                loop
+                                muted
+                                playsInline
+                                className="w-auto h-auto max-h-[75vh] object-contain shadow-2xl"
+                            />
+                        ) : (
+                            <img 
+                                src={currentImg.src} 
+                                alt={currentImg.caption || "Lightbox full view"}
+                                className="w-auto h-auto max-h-[75vh] object-contain shadow-2xl"
+                            />
+                        )}
                         {/* Static Caption (Lightbox View) */}
                         {currentImg.caption && (
                             <p className="mt-4 text-sm text-[#999999] opacity-80 font-light tracking-wide w-full text-left">

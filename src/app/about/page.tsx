@@ -55,7 +55,7 @@ export default function AboutPage() {
                 <div className="col-span-8 md:col-span-3 md:col-start-6">
                     <ImageGallery
                         images={[{ src: "/About.jpg", caption: "" }]}
-                        imageClassName="grayscale opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                        imageClassName="opacity-90 group-hover:opacity-100 transition-all duration-700"
                     />
                 </div>
 

@@ -70,6 +70,45 @@ export function getWorkBySlug(slug: string): WorkDetail | null {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data, content } = matter(fileContent);
 
+  // Auto-discover images in public/
+  const publicDir = path.join(process.cwd(), 'public', 'image');
+  let autoImages: string[] = [];
+  if (fs.existsSync(publicDir)) {
+    const folders = fs.readdirSync(publicDir);
+    const slugLower = slug.toLowerCase();
+    for (const folder of folders) {
+      if (path.extname(folder)) continue; // skip files at root if any
+      const folderPath = path.join(publicDir, folder);
+      if (!fs.lstatSync(folderPath).isDirectory()) continue;
+      
+      const files = fs.readdirSync(folderPath);
+      const matched = files
+        .filter(f => f.toLowerCase().startsWith(`${slugLower}_`) && /\.(jpg|jpeg|png|gif|webp|mp4)$/i.test(f))
+        .map(f => `/image/${folder}/${f}`);
+        
+      if (matched.length > 0) {
+        autoImages = autoImages.concat(matched);
+      }
+    }
+    
+    autoImages.sort((a, b) => {
+      const numA = parseInt(a.match(/_(\d+)\./)?.[1] || '0', 10);
+      const numB = parseInt(b.match(/_(\d+)\./)?.[1] || '0', 10);
+      return numA - numB;
+    });
+  }
+
+  // Filter out mainImage if it's in the list so it doesn't duplicate
+  if (data.image) {
+    autoImages = autoImages.filter(img => img !== data.image);
+  }
+
+  // Merge discovered images with any explicitly defined images, preferring discovered.
+  // We can just set it as the primary array.
+  if (autoImages.length > 0) {
+    data.images = autoImages;
+  }
+
   return {
     slug,
     frontmatter: data as WorkFrontmatter,

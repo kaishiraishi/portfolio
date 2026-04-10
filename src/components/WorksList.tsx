@@ -22,11 +22,22 @@ export default function WorksList({ works }: WorksListProps) {
                             }`}
                     >
                         {work.frontmatter.image && (
-                            <img
-                                src={work.frontmatter.image}
-                                alt=""
-                                className="w-full h-full object-cover grayscale brightness-125"
-                            />
+                            /\.(mp4|webm)$/i.test(work.frontmatter.image) ? (
+                                <video
+                                    src={work.frontmatter.image}
+                                    autoPlay
+                                    loop
+                                    muted
+                                    playsInline
+                                    className="w-full h-full object-cover grayscale brightness-125"
+                                />
+                            ) : (
+                                <img
+                                    src={work.frontmatter.image}
+                                    alt=""
+                                    className="w-full h-full object-cover grayscale brightness-125"
+                                />
+                            )
                         )}
                     </div>
                 ))}
