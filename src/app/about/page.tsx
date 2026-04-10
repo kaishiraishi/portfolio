@@ -79,26 +79,44 @@ export default function AboutPage() {
 
                 {/* ─ Hobby ─ */}
                 <div className="col-span-8 mt-12">
-                    <section className="max-w-[480px]">
+                    <section className="w-full">
                         <h2 className="text-xs tracking-[0.3em] uppercase mb-12 opacity-70">Hobby</h2>
-                        <div className="space-y-12">
-                            <div className="space-y-3">
-                                <h3 className="text-2xl font-light">縦走登山</h3>
-                                <p className="text-sm opacity-60 leading-relaxed">
-                                    アルプスの稜線をテントを担いで歩いています。自分の足で高い所へ登り、その場の空気感を肌で感じることは、画面の中だけでは得られない強いインスピレーションの源です。
-                                </p>
+                        <div className="space-y-24">
+                            <div className="grid grid-cols-8 gap-x-4 gap-y-8 items-start">
+                                <div className="col-span-8 md:col-span-3 space-y-4 md:pr-8 pt-1">
+                                    <h3 className="text-2xl font-light leading-none">縦走登山</h3>
+                                    <p className="text-sm opacity-60 leading-relaxed md:pr-4">
+                                        アルプスの稜線をテントを担いで歩いています。自分の足で高い所へ登り、その場の空気感を肌で感じることは、画面の中だけでは得られない強いインスピレーションの源です。
+                                    </p>
+                                </div>
+                                <div className="col-span-8 md:col-span-5">
+                                    <ImageGallery
+                                        images={[
+                                            { src: "/image/hobby_1_1.jpg", alt: "縦走登山 1" },
+                                            { src: "/image/hobby_1_2.jpg", alt: "縦走登山 2" },
+                                            { src: "/image/hobby_1_3.jpeg", alt: "縦走登山 3" }
+                                        ]}
+                                        galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
+                                        itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
+                                        imageClassName="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-700"
+                                    />
+                                </div>
                             </div>
-                            <div className="space-y-3">
-                                <h3 className="text-2xl font-light">古民家改装</h3>
-                                <p className="text-sm opacity-60 leading-relaxed">
-                                    父親と共に森のログハウスを改装中。焚き火を囲み、自分の手で住環境を作り変えていくプロセスは、ものづくりの原点を感じる大切な時間です。
-                                </p>
+                            <div className="grid grid-cols-8 gap-x-4 gap-y-8 items-start">
+                                <div className="col-span-8 md:col-span-3 space-y-4 md:pr-8 pt-1">
+                                    <h3 className="text-2xl font-light leading-none">古民家改装</h3>
+                                    <p className="text-sm opacity-60 leading-relaxed md:pr-4">
+                                        父親と共に森のログハウスを改装中。焚き火を囲み、自分の手で住環境を作り変えていくプロセスは、ものづくりの原点を感じる大切な時間です。
+                                    </p>
+                                </div>
                             </div>
-                            <div className="space-y-3">
-                                <h3 className="text-2xl font-light">夜景スポット探し</h3>
-                                <p className="text-sm opacity-60 leading-relaxed">
-                                    地形図や航空写真から仮説を立て、実際に足を運んで答え合わせをする。自分だけの絶景ポイントを見つけた時の達成感は格別です。
-                                </p>
+                            <div className="grid grid-cols-8 gap-x-4 gap-y-8 items-start">
+                                <div className="col-span-8 md:col-span-3 space-y-4 md:pr-8 pt-1">
+                                    <h3 className="text-2xl font-light leading-none">夜景スポット探し</h3>
+                                    <p className="text-sm opacity-60 leading-relaxed md:pr-4">
+                                        地形図や航空写真から仮説を立て、実際に足を運んで答え合わせをする。自分だけの絶景ポイントを見つけた時の達成感は格別です。
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </section>

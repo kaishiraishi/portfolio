@@ -13,9 +13,18 @@ interface ImageGalleryProps {
     mainImageCaption?: string;
     images?: (string | ImageItem)[];
     imageClassName?: string;
+    galleryClassName?: string;
+    itemClassName?: string;
 }
 
-export default function ImageGallery({ mainImage, mainImageCaption, images = [], imageClassName }: ImageGalleryProps) {
+export default function ImageGallery({ 
+    mainImage, 
+    mainImageCaption, 
+    images = [], 
+    imageClassName,
+    galleryClassName = "space-y-16",
+    itemClassName = "flex flex-col items-start w-full"
+}: ImageGalleryProps) {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
     // Normalize images into a single consistent array
@@ -60,12 +69,12 @@ export default function ImageGallery({ mainImage, mainImageCaption, images = [],
     return (
         <>
             {/* Base Gallery Flow */}
-            <div className="space-y-16">
+            <div className={galleryClassName}>
                 {allImages.map((img, i) => (
-                    <div key={i} className="flex flex-col items-start w-full">
+                    <div key={i} className={itemClassName}>
                         <button 
                             onClick={() => setLightboxIndex(i)}
-                            className="relative w-full outline-none cursor-zoom-in group flex-shrink-0 bg-transparent flex items-center justify-center"
+                            className="relative w-full h-full outline-none cursor-zoom-in group flex-shrink-0 bg-transparent flex items-center justify-center"
                         >
                             {/\.(mp4|webm)$/i.test(img.src) ? (
                                 <video

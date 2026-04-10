@@ -44,7 +44,7 @@ export default async function WorkDetailPage({ params }: Props) {
     const { frontmatter, content } = work;
 
     return (
-        <article className="max-w-[1152px] mx-auto px-4 md:px-8 py-20 font-extralight text-primary">
+        <article className="max-w-[1152px] mx-auto py-20 font-extralight text-primary">
             <div className="grid grid-cols-8 gap-x-12 gap-y-24">
                 {/* ─ Left: Visuals Row/Col ─ */}
                 <div className="col-span-8 lg:col-span-5 space-y-16">
