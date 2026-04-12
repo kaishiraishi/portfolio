@@ -11,7 +11,7 @@ export default function AboutPage() {
         <div className="max-w-[1152px] mx-auto px-4 md:px-8 py-20 font-extralight text-primary">
             <div className="grid grid-cols-8 gap-x-4 gap-y-24">
                 {/* ─ Header ─ */}
-                <header className="col-span-8 md:col-span-4 self-start">
+                <header className="col-span-5 md:col-span-4 self-start">
                     <div className="space-y-12">
                         {/* ─ Name Block ─ */}
                         <div>
@@ -52,10 +52,10 @@ export default function AboutPage() {
                 </header>
 
                 {/* ─ Visual ─ */}
-                <div className="col-span-8 md:col-span-3 md:col-start-6">
+                <div className="col-span-3 md:col-start-6">
                     <ImageGallery
                         images={[{ src: "/image/About/About.jpg", caption: "" }]}
-                        imageClassName="opacity-90 group-hover:opacity-100 transition-all duration-700"
+                        imageClassName="opacity-90 group-hover:opacity-100 transition-all duration-700 w-full h-auto object-cover"
                     />
                 </div>
 
