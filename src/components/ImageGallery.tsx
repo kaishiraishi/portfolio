@@ -29,7 +29,13 @@ export default function ImageGallery({
 
     // Normalize images into a single consistent array
     const allImages: ImageItem[] = [];
-    if (mainImage) {
+    
+    // Check if mainImage is already explicitly placed in the images array
+    const isMainImageInList = images.some(img => 
+        typeof img === "string" ? img === mainImage : img.src === mainImage
+    );
+
+    if (mainImage && !isMainImageInList) {
         allImages.push({ src: mainImage, caption: mainImageCaption });
     }
     
@@ -70,37 +76,42 @@ export default function ImageGallery({
         <>
             {/* Base Gallery Flow */}
             <div className={galleryClassName}>
-                {allImages.map((img, i) => (
-                    <div key={i} className={itemClassName}>
-                        <button 
-                            onClick={() => setLightboxIndex(i)}
-                            className="relative w-full h-full outline-none cursor-zoom-in group flex-shrink-0 bg-transparent flex items-center justify-center"
-                        >
-                            {/\.(mp4|webm)$/i.test(img.src) ? (
-                                <video
-                                    src={img.src}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
-                                />
-                            ) : (
-                                <img
-                                    src={img.src}
-                                    alt={img.alt || img.caption || `Image ${i + 1}`}
-                                    className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
-                                />
+                {allImages.map((img, i) => {
+                    // Skip rendering if src is empty or not provided
+                    if (!img.src) return null;
+                    
+                    return (
+                        <div key={i} className={`relative ${itemClassName}`}>
+                            <button 
+                                onClick={() => setLightboxIndex(i)}
+                                className="relative w-full h-full outline-none cursor-zoom-in group flex-shrink-0 bg-transparent flex items-center justify-center"
+                            >
+                                {/\.(mp4|webm)$/i.test(img.src) ? (
+                                    <video
+                                        src={img.src}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
+                                        className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
+                                    />
+                                ) : (
+                                    <img
+                                        src={img.src}
+                                        alt={img.alt || img.caption || `Image ${i + 1}`}
+                                        className={`w-full h-full object-contain ${imageClassName || 'opacity-100 group-hover:opacity-80 transition-all duration-700'}`}
+                                    />
+                                )}
+                            </button>
+                            {/* Static Caption (Normal View) */}
+                            {(img.alt || img.caption) && (
+                                <p className="absolute -bottom-8 left-0 text-sm text-[#777777] opacity-90 font-light tracking-wide w-full text-left">
+                                    {img.alt || img.caption}
+                                </p>
                             )}
-                        </button>
-                        {/* Static Caption (Normal View) */}
-                        {img.caption && (
-                            <p className="mt-3 text-sm text-[#999999] opacity-80 font-light tracking-wide w-full text-left">
-                                {img.caption}
-                            </p>
-                        )}
-                    </div>
-                ))}
+                        </div>
+                    );
+                })}
             </div>
 
             {/* Lightbox Modal */}
@@ -156,14 +167,14 @@ export default function ImageGallery({
                         ) : (
                             <img 
                                 src={currentImg.src} 
-                                alt={currentImg.caption || "Lightbox full view"}
+                                alt={currentImg.alt || currentImg.caption || "Lightbox full view"}
                                 className="w-auto h-auto max-h-[75vh] object-contain shadow-2xl"
                             />
                         )}
                         {/* Static Caption (Lightbox View) */}
-                        {currentImg.caption && (
-                            <p className="mt-4 text-sm text-[#999999] opacity-80 font-light tracking-wide w-full text-left">
-                                {currentImg.caption}
+                        {(currentImg.alt || currentImg.caption) && (
+                            <p className="mt-4 text-sm text-[#777777] opacity-90 font-light tracking-wide w-full text-left">
+                                {currentImg.alt || currentImg.caption}
                             </p>
                         )}
                     </div>

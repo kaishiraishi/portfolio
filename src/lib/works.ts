@@ -16,7 +16,8 @@ export interface WorkFrontmatter {
   images?: any[]; // Supports both `string` or `{src: string, caption?: string}`
   youtubeId?: string;
   role: string;
-  tech: string[];
+  tech?: string[];
+  technical?: string[];
   members?: string;
   category?: string;
   achievements?: string;

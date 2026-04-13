@@ -52,28 +52,41 @@ export default function AboutPage() {
                 </header>
 
                 {/* ─ Visual ─ */}
-                <div className="col-span-3 md:col-start-6">
-                    <ImageGallery
-                        images={[{ src: "/image/About/About.jpg", caption: "" }]}
-                        imageClassName="opacity-90 group-hover:opacity-100 transition-all duration-700 w-full h-auto object-cover"
-                    />
+                <div className="col-span-3 md:col-start-6 mt-12 md:mt-24">
+                    <div className="scale-75 origin-top-right">
+                        <ImageGallery
+                            images={[{ src: "/image/About/About.jpg", caption: "" }]}
+                            imageClassName="transition-all duration-700 w-full h-auto object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100"
+                        />
+                    </div>
                 </div>
 
                 {/* ─ Philosophy ─ */}
-                <section className="col-span-8 md:col-span-5">
-                    <h2 className="text-xs tracking-[0.3em] uppercase mb-12 opacity-70">Philosophy: Analog / Digital</h2>
-                    <blockquote className="text-2xl sm:text-3xl leading-relaxed mb-12 text-center py-4">
-                        “五感のインプットを、デジタルの体験へ。”
-                    </blockquote>
-                    <div className="space-y-8 text-lg leading-relaxed opacity-80 font-light">
-                        <p>
-                            どんなに技術が進歩しても、人を最後に突き動かすのは鼻腔を抜ける空気・風の肌触りや、鼓動のリズムといった根源的な体験だと私は考えます。だからこそ机上の設計図だけで作品を語らず、足で歩き、手で触れ、心で “揺らぎ” を捕まえる。そこで得た温度を、プログラムとピクセルで再構成し、ワクワクさせるデジタルな体験へ<span className="whitespace-nowrap">昇華させます。</span>
-                        </p>
-                        <p>
-                            私が目指すのは、アルゴリズムが正解を提示して体験を最適化し、迷いや偶然を消し去ることではありません。進歩した技術を使って世界の解像度だけを上げ、可能性をそっと照らしながら、最後の意思決定は身体と直感に委ねたい。偶然が起きうる余白を守る—そんなテクノロジーのあり方を探求しています。
-                        </p>
+                <div className="col-span-8 grid grid-cols-8 gap-x-4 items-center relative">
+                    {/* Background image: 5 cols, pushed further right */}
+                    <div className="col-span-8 md:col-start-4 md:col-span-5 row-start-1 z-0 pointer-events-none md:translate-x-8">
+                        <ImageGallery
+                            images={[{ src: "/image/arrival_scan_15_edited.png", alt: "" }]}
+                            imageClassName="w-full h-auto object-cover opacity-80"
+                        />
                     </div>
-                </section>
+
+                    {/* Foreground text */}
+                    <section className="col-span-8 md:col-start-1 md:col-span-6 row-start-1 z-10">
+                        <h2 className="text-xs tracking-[0.3em] uppercase mb-12 opacity-70">Philosophy: Analog / Digital</h2>
+                        <blockquote className="text-2xl sm:text-3xl leading-relaxed mb-12 py-4">
+                            “五感のインプットを、デジタルの体験へ。”
+                        </blockquote>
+                        <div className="space-y-8 text-lg leading-relaxed font-light">
+                            <p>
+                                どんなに技術が進歩しても、人を最後に突き動かすのは鼻腔を抜ける空気・風の肌触りや、鼓動のリズムといった根源的な体験だと私は考えます。だからこそ机上の設計図だけで作品を語らず、足で歩き、手で触れ、心で “揺らぎ” を捕まえる。そこで得た温度を、プログラムとピクセルで再構成し、ワクワクさせるデジタルな体験へ<span className="whitespace-nowrap">昇華させます。</span>
+                            </p>
+                            <p>
+                                私が目指すのは、アルゴリズムが正解を提示して体験を最適化し、迷いや偶然を消し去ることではありません。進歩した技術を使って世界の解像度だけを上げ、可能性をそっと照らしながら、最後の意思決定は身体と直感に委ねたい。偶然が起きうる余白を守る—そんなテクノロジーのあり方を探求しています。
+                            </p>
+                        </div>
+                    </section>
+                </div>
 
 
 
@@ -82,6 +95,7 @@ export default function AboutPage() {
                     <section className="w-full">
                         <h2 className="text-xs tracking-[0.3em] uppercase mb-12 opacity-70">Hobby</h2>
                         <div className="space-y-24">
+                            {/* Hobby 1 */}
                             <div className="grid grid-cols-8 gap-x-4 gap-y-8 items-start">
                                 <div className="col-span-8 md:col-span-3 space-y-4 md:pr-8 pt-1">
                                     <h3 className="text-2xl font-light leading-none">縦走登山</h3>
@@ -92,16 +106,17 @@ export default function AboutPage() {
                                 <div className="col-span-8 md:col-span-5">
                                     <ImageGallery
                                         images={[
-                                            { src: "/image/hobby_1_1.jpg", alt: "縦走登山 1" },
+                                            { src: "/image/Hobby_1_1.jpeg", alt: "縦走登山 1" },
                                             { src: "/image/hobby_1_2.jpg", alt: "縦走登山 2" },
-                                            { src: "/image/hobby_1_3.jpeg", alt: "縦走登山 3" }
+                                            { src: "/image/Hobby_1_3.jpeg", alt: "縦走登山 3" }
                                         ]}
                                         galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
                                         itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
-                                        imageClassName="w-full h-full object-cover opacity-80 hover:opacity-100 hover:scale-105 transition-all duration-700"
+                                        imageClassName="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 hover:scale-105 transition-all duration-700"
                                     />
                                 </div>
                             </div>
+                            {/* Hobby 2 */}
                             <div className="grid grid-cols-8 gap-x-4 gap-y-8 items-start">
                                 <div className="col-span-8 md:col-span-3 space-y-4 md:pr-8 pt-1">
                                     <h3 className="text-2xl font-light leading-none">古民家改装</h3>
@@ -109,7 +124,20 @@ export default function AboutPage() {
                                         父親と共に森のログハウスを改装中。焚き火を囲み、自分の手で住環境を作り変えていくプロセスは、ものづくりの原点を感じる大切な時間です。
                                     </p>
                                 </div>
+                                <div className="col-span-8 md:col-span-5">
+                                    <ImageGallery
+                                        images={[
+                                            { src: "/image/Hobby_2_1.jpg", alt: "古民家改装 1" },
+                                            { src: "/image/Hobby_2_2.jpeg", alt: "古民家改装 2" },
+                                            { src: "/image/Hobby_2_3.jpeg", alt: "古民家改装 3" }
+                                        ]}
+                                        galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
+                                        itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
+                                        imageClassName="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 hover:scale-105 transition-all duration-700"
+                                    />
+                                </div>
                             </div>
+                            {/* Hobby 3 */}
                             <div className="grid grid-cols-8 gap-x-4 gap-y-8 items-start">
                                 <div className="col-span-8 md:col-span-3 space-y-4 md:pr-8 pt-1">
                                     <h3 className="text-2xl font-light leading-none">夜景スポット探し</h3>
@@ -117,9 +145,28 @@ export default function AboutPage() {
                                         地形図や航空写真から仮説を立て、実際に足を運んで答え合わせをする。自分だけの絶景ポイントを見つけた時の達成感は格別です。
                                     </p>
                                 </div>
+                                <div className="col-span-8 md:col-span-5">
+                                    <ImageGallery
+                                        images={[
+                                            { src: "/image/hobby_3_1.jpg", alt: "夜景スポット探し 1" },
+                                            { src: "/image/hobby_3_2.jpg", alt: "夜景スポット探し 2" },
+                                            { src: "/image/hobby_3_3.JPG", alt: "夜景スポット探し 3" }
+                                        ]}
+                                        galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
+                                        itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
+                                        imageClassName="w-full h-full object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100 hover:scale-105 transition-all duration-700"
+                                    />
+                                </div>
                             </div>
                         </div>
                     </section>
+                </div>
+            </div>
+
+            {/* ─ Copyright Footer ─ */}
+            <div className="mt-32 pt-12 border-t border-[#999999]/30 flex justify-center">
+                <div className="text-[10px] tracking-[0.12em] text-[#999999]/80 font-light font-['Helvetica_Neue',Helvetica,sans-serif] uppercase">
+                    © 2026 kaishiraishi all rights reserved
                 </div>
             </div>
         </div>
