@@ -6,9 +6,9 @@ export default function WorksPage() {
   const works = getAllWorks();
 
   return (
-    <div className="-mt-8 pb-16">
+    <div className="mt-16 pb-0">
       {/* ─ Main Works ─ */}
-      <div className="relative min-h-[calc(100vh-160px)] flex flex-col justify-center">
+      <div className="relative flex flex-col ">
         <div className="w-full">
           <WorksList works={works} />
         </div>

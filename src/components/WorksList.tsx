@@ -12,7 +12,7 @@ export default function WorksList({ works }: WorksListProps) {
     const [hoveredWork, setHoveredWork] = useState<Work | null>(null);
 
     return (
-        <div className="relative min-h-[60vh]">
+        <div className="relative min-h-[50vh]">
             {/* Full-screen Background Image on Hover */}
             <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-700 ease-in-out">
                 {works.map((work) => (

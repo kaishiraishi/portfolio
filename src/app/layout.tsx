@@ -34,7 +34,7 @@ export default function RootLayout({
         <GridOverlay />
         <div className="relative z-10 flex flex-col min-h-screen">
           <SiteHeader />
-          <main className="flex-1 w-full max-w-[1152px] mx-auto px-4 md:px-8 lg:px-[72px] pb-32">
+          <main className="flex-1 w-full max-w-[1152px] mx-auto px-4 md:px-8 lg:px-[72px] pb-16">
             {children}
           </main>
         </div>
