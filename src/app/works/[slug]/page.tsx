@@ -91,7 +91,7 @@ export default async function WorkDetailPage({ params }: Props) {
                         {frontmatter.members && (
                             <div className="grid grid-cols-3 gap-4 text-sm">
                                 <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Member</div>
-                                <div className="col-span-2 text-primary">{frontmatter.members}</div>
+                                <div className="col-span-2 text-primary leading-relaxed" dangerouslySetInnerHTML={{ __html: frontmatter.members }} />
                             </div>
                         )}
                         {frontmatter.category && (
@@ -111,7 +111,7 @@ export default async function WorkDetailPage({ params }: Props) {
                                 <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Technical</div>
                                 <div className="col-span-2 text-primary font-light">
                                     {Array.isArray(frontmatter.tech || frontmatter.technical) 
-                                        ? (frontmatter.tech || frontmatter.technical).join(" / ") 
+                                        ? ((frontmatter.tech || frontmatter.technical) as string[]).join(" / ") 
                                         : (frontmatter.tech || frontmatter.technical)}
                                 </div>
                             </div>
