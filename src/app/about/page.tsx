@@ -55,7 +55,7 @@ export default function AboutPage() {
                 <div className="col-span-3 md:col-start-6 mt-12 md:mt-24">
                     <div className="scale-75 origin-top-right">
                         <ImageGallery
-                            images={[{ src: "/image/About/About.jpg", caption: "" }]}
+                            images={[{ src: "/portfolio/portfolio/image/About/About.jpg", caption: "" }]}
                             imageClassName="transition-all duration-700 w-full h-auto object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100"
                         />
                     </div>
@@ -66,7 +66,7 @@ export default function AboutPage() {
                     {/* Background image: 5 cols, pushed further right */}
                     <div className="col-span-8 md:col-start-4 md:col-span-5 row-start-1 z-0 pointer-events-none md:translate-x-8">
                         <ImageGallery
-                            images={[{ src: "/image/arrival_scan_15_edited.png", alt: "" }]}
+                            images={[{ src: "/portfolio/image/arrival_scan_15_edited.png", alt: "" }]}
                             imageClassName="w-full h-auto object-cover opacity-80"
                         />
                     </div>
@@ -106,9 +106,9 @@ export default function AboutPage() {
                                 <div className="col-span-8 md:col-span-5">
                                     <ImageGallery
                                         images={[
-                                            { src: "/image/Hobby_1_1.jpeg", alt: "縦走登山 1" },
-                                            { src: "/image/hobby_1_2.jpg", alt: "縦走登山 2" },
-                                            { src: "/image/Hobby_1_3.jpeg", alt: "縦走登山 3" }
+                                            { src: "/portfolio/image/Hobby_1_1.jpeg", alt: "縦走登山 1" },
+                                            { src: "/portfolio/image/hobby_1_2.jpg", alt: "縦走登山 2" },
+                                            { src: "/portfolio/image/Hobby_1_3.jpeg", alt: "縦走登山 3" }
                                         ]}
                                         galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
                                         itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
@@ -127,9 +127,9 @@ export default function AboutPage() {
                                 <div className="col-span-8 md:col-span-5">
                                     <ImageGallery
                                         images={[
-                                            { src: "/image/Hobby_2_1.jpg", alt: "古民家改装 1" },
-                                            { src: "/image/Hobby_2_2.jpeg", alt: "古民家改装 2" },
-                                            { src: "/image/Hobby_2_3.jpeg", alt: "古民家改装 3" }
+                                            { src: "/portfolio/image/Hobby_2_1.jpg", alt: "古民家改装 1" },
+                                            { src: "/portfolio/image/Hobby_2_2.jpeg", alt: "古民家改装 2" },
+                                            { src: "/portfolio/image/Hobby_2_3.jpeg", alt: "古民家改装 3" }
                                         ]}
                                         galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
                                         itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
@@ -148,9 +148,9 @@ export default function AboutPage() {
                                 <div className="col-span-8 md:col-span-5">
                                     <ImageGallery
                                         images={[
-                                            { src: "/image/hobby_3_1.jpg", alt: "夜景スポット探し 1" },
-                                            { src: "/image/hobby_3_2.jpg", alt: "夜景スポット探し 2" },
-                                            { src: "/image/hobby_3_3.JPG", alt: "夜景スポット探し 3" }
+                                            { src: "/portfolio/image/hobby_3_1.jpg", alt: "夜景スポット探し 1" },
+                                            { src: "/portfolio/image/hobby_3_2.jpg", alt: "夜景スポット探し 2" },
+                                            { src: "/portfolio/image/hobby_3_3.JPG", alt: "夜景スポット探し 3" }
                                         ]}
                                         galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
                                         itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
