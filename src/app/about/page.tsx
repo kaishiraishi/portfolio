@@ -55,7 +55,7 @@ export default function AboutPage() {
                 <div className="col-span-3 md:col-start-6 mt-12 md:mt-24">
                     <div className="scale-75 origin-top-right">
                         <ImageGallery
-                            images={[{ src: "/portfolio/portfolio/image/About/About.jpg", caption: "" }]}
+                            images={[{ src: "/portfolio/image/About/About.jpg", caption: "" }]}
                             imageClassName="transition-all duration-700 w-full h-auto object-cover grayscale opacity-90 hover:grayscale-0 hover:opacity-100"
                         />
                     </div>
@@ -108,7 +108,7 @@ export default function AboutPage() {
                                         images={[
                                             { src: "/portfolio/image/Hobby_1_1.jpeg", alt: "縦走登山 1" },
                                             { src: "/portfolio/image/hobby_1_2.jpg", alt: "縦走登山 2" },
-                                            { src: "/portfolio/image/Hobby_1_3.jpeg", alt: "縦走登山 3" }
+                                            { src: "/portfolio/image/hobby_1_3.jpeg", alt: "縦走登山 3" }
                                         ]}
                                         galleryClassName="grid grid-cols-3 gap-3 md:gap-4"
                                         itemClassName="overflow-hidden bg-black/5 aspect-[3/4]"
