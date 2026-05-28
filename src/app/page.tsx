@@ -15,7 +15,7 @@ export default function WorksPage() {
       </div>
 
       {/* ─ SNS Icons & Copyright ─ */}
-      <div className="fixed bottom-0 right-0 flex items-center gap-8 z-50 mb-8 mr-4 md:mr-8 lg:mr-[72px]">
+      <div className="fixed bottom-0 right-0 flex items-center gap-8 z-50 mb-6 mr-6 sm:mb-8 sm:mr-8 lg:mr-[72px]">
         <div className="text-[10px] tracking-[0.12em] text-[#999999]/80 font-light font-['Helvetica_Neue',Helvetica,sans-serif] uppercase hidden md:block">
           © 2026 kaishiraishi all rights reserved
         </div>

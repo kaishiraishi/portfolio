@@ -43,20 +43,120 @@ export default async function WorkDetailPage({ params }: Props) {
 
     const { frontmatter, content } = work;
 
+    // PCでのみ横に貼り付き（sticky）、スマートフォンでは通常の流れで配置する構造を作成します
+    // 左側（画像エリア）に表示する情報ブロックも用意し、画面幅に応じて出し分けます。
+    
+    const informationBlock = (
+        <div className="h-fit">
+            {/* Header */}
+            <div className="mb-8">
+                <h1 className="text-2xl sm:text-3xl md:text-4xl font-light tracking-tight mb-2 leading-none">
+                    {frontmatter.title}
+                    <span className="text-[#999999] opacity-80 ml-3 md:ml-4 inline-block transform translate-y-[-0.1em] text-lg sm:text-xl md:text-2xl font-extralight">
+                        / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
+                    </span>
+                </h1>
+
+                {/* Summary */}
+                {frontmatter.summary && (
+                    <p className="mt-8 text-sm font-light leading-relaxed opacity-80 whitespace-pre-line">
+                        {frontmatter.summary}
+                    </p>
+                )}
+            </div>
+
+            <div className="border-t border-primary/20 pt-8 mb-0 space-y-4 md:space-y-2">
+                {/* Metadata Rows */}
+                {frontmatter.members && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 text-sm">
+                        <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Member</div>
+                        <div className="md:col-span-2 text-primary leading-relaxed" dangerouslySetInnerHTML={{ __html: frontmatter.members }} />
+                    </div>
+                )}
+                {frontmatter.category && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 text-sm">
+                        <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Category</div>
+                        <div className="md:col-span-2 text-primary">{frontmatter.category}</div>
+                    </div>
+                )}
+                {frontmatter.role && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 text-sm">
+                        <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Role</div>
+                        <div className="md:col-span-2 text-primary font-normal">{frontmatter.role}</div>
+                    </div>
+                )}
+                {(frontmatter.tech || frontmatter.technical) && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 text-sm">
+                        <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Technical</div>
+                        <div className="md:col-span-2 text-primary font-light">
+                            {Array.isArray(frontmatter.tech || frontmatter.technical) 
+                                ? ((frontmatter.tech || frontmatter.technical) as string[]).join(" / ") 
+                                : (frontmatter.tech || frontmatter.technical)}
+                        </div>
+                    </div>
+                )}
+                {(frontmatter.awards || frontmatter.achievements) && (
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-1 md:gap-4 text-sm">
+                        <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Awards</div>
+                        <div className="md:col-span-2 text-primary font-light whitespace-pre-line">{frontmatter.awards || frontmatter.achievements}</div>
+                    </div>
+                )}
+            </div>
+
+            {/* External Links */}
+            {(frontmatter.repo || frontmatter.demo) && (
+                <div className="flex gap-12 mb-16 border-b border-primary/10 pb-8">
+                    {frontmatter.repo && (
+                        <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer"
+                            className="text-xs uppercase tracking-[0.2em] opacity-100 hover:opacity-50 transition-opacity underline underline-offset-8">
+                            Repository
+                        </a>
+                    )}
+                    {frontmatter.demo && (
+                        <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer"
+                            className="text-xs uppercase tracking-[0.2em] opacity-100 hover:opacity-50 transition-opacity underline underline-offset-8">
+                            Live Demo
+                        </a>
+                    )}
+                </div>
+            )}
+
+            {/* Main Description (Japanese) */}
+            <div className="prose max-w-none font-light prose-headings:font-normal prose-headings:text-[#777777] prose-h2:text-xl prose-h2:tracking-wider prose-h2:mt-12 prose-h2:mb-2 prose-h2:border-b prose-h2:border-[#777777]/20 prose-h2:pb-1 prose-p:text-[#777777] prose-p:leading-relaxed prose-p:text-sm prose-p:mt-4 prose-p:mb-10 prose-strong:text-[#777777] prose-strong:font-normal prose-ul:text-[#777777] prose-li:text-[#777777]">
+                <MDXRemote source={content} />
+            </div>
+
+            {/* English Description */}
+            {frontmatter.engDescription && (
+                <div className="mt-16 pt-12 border-t border-primary/20 text-sm leading-relaxed opacity-60 font-light">
+                    <p className="whitespace-pre-line leading-relaxed">{frontmatter.engDescription}</p>
+                </div>
+            )}
+        </div>
+    );
+
     return (
-        <article className="max-w-[1152px] mx-auto py-20 font-extralight text-primary">
-            <div className="grid grid-cols-8 gap-x-12 gap-y-24">
-                {/* ─ Left: Visuals Row/Col ─ */}
-                <div className="col-span-8 lg:col-span-5 space-y-16">
-                    <ImageGallery 
-                        mainImage={frontmatter.image}
-                        mainImageCaption={frontmatter.imageCaption}
-                        images={frontmatter.images}
-                    />
+        <article className="max-w-[1152px] mx-auto py-12 md:py-20 px-4 md:px-8 lg:px-[72px] font-extralight text-primary">
+            <div className="grid grid-cols-1 lg:grid-cols-8 gap-x-4 md:gap-x-12 gap-y-12 md:gap-y-24">
+                
+                {/* ─ 1. Desktop: Left Visuals Col | Mobile: Full Width List ─ */}
+                <div className="col-span-1 lg:col-span-5 space-y-12 md:space-y-16">
+                    {/* Main Image */}
+                    {frontmatter.image && (
+                        <ImageGallery 
+                            mainImage={frontmatter.image}
+                            mainImageCaption={frontmatter.imageCaption}
+                        />
+                    )}
+
+                    {/* Mobile Only: Information Block injects here between Main Image and other visuals */}
+                    <div className="block lg:hidden w-full">
+                        {informationBlock}
+                    </div>
 
                     {/* YouTube Embed */}
                     {frontmatter.youtubeId && (
-                        <div className="w-full aspect-video bg-black relative">
+                        <div className="w-full aspect-video bg-black relative mb-12 md:mb-16">
                             <iframe
                                 src={`https://www.youtube.com/embed/${frontmatter.youtubeId}`}
                                 className="w-full h-full border-none"
@@ -65,94 +165,16 @@ export default async function WorkDetailPage({ params }: Props) {
                             ></iframe>
                         </div>
                     )}
+
+                    {/* Other Layout Images */}
+                    {frontmatter.images && frontmatter.images.length > 0 && (
+                        <ImageGallery images={frontmatter.images} />
+                    )}
                 </div>
 
-                {/* ─ Right: Information ─ */}
-                <div className="col-span-8 lg:col-span-3 lg:sticky lg:top-12 h-fit">
-                    {/* Header */}
-                    <div className="mb-8">
-                        <h1 className="text-3xl sm:text-4xl font-light tracking-tight mb-2 leading-none">
-                            {frontmatter.title}
-                            <span className="text-[#999999] opacity-80 ml-4 inline-block transform translate-y-[-0.1em] text-xl sm:text-2xl font-extralight">
-                                / {frontmatter.date ? new Date(frontmatter.date).getFullYear() : '—'}
-                            </span>
-                        </h1>
-
-                        {/* Summary */}
-                        {frontmatter.summary && (
-                            <p className="mt-8 text-sm font-light leading-relaxed opacity-80 whitespace-pre-line">
-                                {frontmatter.summary}
-                            </p>
-                        )}
-                    </div>
-
-                    <div className="border-t border-primary/20 pt-8 mb-0 space-y-2">
-                        {/* Metadata Rows */}
-                        {frontmatter.members && (
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                                <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Member</div>
-                                <div className="col-span-2 text-primary leading-relaxed" dangerouslySetInnerHTML={{ __html: frontmatter.members }} />
-                            </div>
-                        )}
-                        {frontmatter.category && (
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                                <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Category</div>
-                                <div className="col-span-2 text-primary">{frontmatter.category}</div>
-                            </div>
-                        )}
-                        {frontmatter.role && (
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                                <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Role</div>
-                                <div className="col-span-2 text-primary font-normal">{frontmatter.role}</div>
-                            </div>
-                        )}
-                        {(frontmatter.tech || frontmatter.technical) && (
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                                <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Technical</div>
-                                <div className="col-span-2 text-primary font-light">
-                                    {Array.isArray(frontmatter.tech || frontmatter.technical) 
-                                        ? ((frontmatter.tech || frontmatter.technical) as string[]).join(" / ") 
-                                        : (frontmatter.tech || frontmatter.technical)}
-                                </div>
-                            </div>
-                        )}
-                        {(frontmatter.awards || frontmatter.achievements) && (
-                            <div className="grid grid-cols-3 gap-4 text-sm">
-                                <div className="opacity-80 uppercase tracking-[0.2em] text-xs font-normal">Awards</div>
-                                <div className="col-span-2 text-primary font-light whitespace-pre-line">{frontmatter.awards || frontmatter.achievements}</div>
-                            </div>
-                        )}
-                    </div>
-
-                    {/* External Links */}
-                    {(frontmatter.repo || frontmatter.demo) && (
-                        <div className="flex gap-12 mb-16 border-b border-primary/10 pb-8">
-                            {frontmatter.repo && (
-                                <a href={frontmatter.repo} target="_blank" rel="noopener noreferrer"
-                                    className="text-xs uppercase tracking-[0.2em] opacity-100 hover:opacity-50 transition-opacity underline underline-offset-8">
-                                    Repository
-                                </a>
-                            )}
-                            {frontmatter.demo && (
-                                <a href={frontmatter.demo} target="_blank" rel="noopener noreferrer"
-                                    className="text-xs uppercase tracking-[0.2em] opacity-100 hover:opacity-50 transition-opacity underline underline-offset-8">
-                                    Live Demo
-                                </a>
-                            )}
-                        </div>
-                    )}
-
-                    {/* Main Description (Japanese) */}
-                    <div className="prose max-w-none font-light prose-headings:font-normal prose-headings:text-[#777777] prose-h2:text-xl prose-h2:tracking-wider prose-h2:mt-12 prose-h2:mb-2 prose-h2:border-b prose-h2:border-[#777777]/20 prose-h2:pb-1 prose-p:text-[#777777] prose-p:leading-relaxed prose-p:text-sm prose-p:mt-4 prose-p:mb-10 prose-strong:text-[#777777] prose-strong:font-normal prose-ul:text-[#777777] prose-li:text-[#777777]">
-                        <MDXRemote source={content} />
-                    </div>
-
-                    {/* English Description */}
-                    {frontmatter.engDescription && (
-                        <div className="mt-16 pt-12 border-t border-primary/20 text-sm leading-relaxed opacity-60 font-light">
-                            <p className="whitespace-pre-line leading-relaxed">{frontmatter.engDescription}</p>
-                        </div>
-                    )}
+                {/* ─ 2. Desktop Only: Right Information Col (Sticky) ─ */}
+                <div className="hidden lg:block lg:col-span-3 lg:sticky lg:top-24 h-fit">
+                    {informationBlock}
                 </div>
             </div>
 

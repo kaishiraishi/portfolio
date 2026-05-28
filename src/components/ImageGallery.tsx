@@ -105,7 +105,7 @@ export default function ImageGallery({
                             </button>
                             {/* Static Caption (Normal View) */}
                             {(img.alt || img.caption) && (
-                                <p className="absolute -bottom-8 left-0 text-sm text-[#777777] opacity-90 font-light tracking-wide w-full text-left">
+                                <p className="absolute -bottom-6 sm:-bottom-8 left-0 text-xs sm:text-sm text-[#777777] opacity-90 font-light tracking-wide w-full text-left">
                                     {img.alt || img.caption}
                                 </p>
                             )}
@@ -117,12 +117,12 @@ export default function ImageGallery({
             {/* Lightbox Modal */}
             {currentImg && lightboxIndex !== null && (
                 <div 
-                    className="fixed inset-0 z-50 bg-white/60 backdrop-blur-xl flex flex-col items-center justify-center p-4 md:p-12 cursor-zoom-out animate-in fade-in"
+                    className="fixed inset-0 z-50 bg-white/60 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-6 md:p-12 cursor-zoom-out animate-in fade-in"
                     onClick={() => setLightboxIndex(null)}
                 >
                     {/* Counter (e.g., 01 / 03) */}
                     {allImages.length > 1 && (
-                        <div className="absolute top-8 left-8 md:top-12 md:left-12 text-sm font-light tracking-[0.2em] text-[#999999] opacity-80">
+                        <div className="absolute top-4 left-4 sm:top-8 sm:left-8 md:top-12 md:left-12 text-sm font-light tracking-[0.2em] text-[#999999] opacity-80">
                             {String(lightboxIndex + 1).padStart(2, '0')} / {String(allImages.length).padStart(2, '0')}
                         </div>
                     )}
@@ -131,10 +131,10 @@ export default function ImageGallery({
                     {allImages.length > 1 && (
                         <button 
                             onClick={handlePrev}
-                            className="absolute left-2 md:left-12 top-1/2 -translate-y-1/2 p-4 text-[#999999] opacity-40 hover:opacity-100 transition-colors outline-none cursor-pointer"
+                            className="absolute left-2 sm:left-6 md:left-12 top-1/2 -translate-y-1/2 p-2 sm:p-4 text-[#999999] opacity-40 hover:opacity-100 transition-colors outline-none cursor-pointer"
                             aria-label="Previous image"
                         >
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 sm:w-8 sm:h-8">
                                 <polyline points="15 18 9 12 15 6"></polyline>
                             </svg>
                         </button>
@@ -144,17 +144,17 @@ export default function ImageGallery({
                     {allImages.length > 1 && (
                         <button 
                             onClick={handleNext}
-                            className="absolute right-2 md:right-12 top-1/2 -translate-y-1/2 p-4 text-[#999999] opacity-40 hover:opacity-100 transition-colors outline-none cursor-pointer"
+                            className="absolute right-2 sm:right-6 md:right-12 top-1/2 -translate-y-1/2 p-2 sm:p-4 text-[#999999] opacity-40 hover:opacity-100 transition-colors outline-none cursor-pointer"
                             aria-label="Next image"
                         >
-                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="w-6 h-6 sm:w-8 sm:h-8">
                                 <polyline points="9 18 15 12 9 6"></polyline>
                             </svg>
                         </button>
                     )}
 
                     {/* Image and Caption Container */}
-                    <div className="flex flex-col items-start justify-center max-w-[85vw] md:max-w-5xl">
+                    <div className="flex flex-col items-start justify-center max-w-[90vw] md:max-w-5xl">
                         {/\.(mp4|webm)$/i.test(currentImg.src) ? (
                             <video 
                                 src={currentImg.src} 
@@ -162,13 +162,13 @@ export default function ImageGallery({
                                 loop
                                 muted
                                 playsInline
-                                className="w-auto h-auto max-h-[75vh] object-contain shadow-2xl"
+                                className="w-auto h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[75vh] object-contain shadow-2xl"
                             />
                         ) : (
                             <img 
                                 src={currentImg.src} 
                                 alt={currentImg.alt || currentImg.caption || "Lightbox full view"}
-                                className="w-auto h-auto max-h-[75vh] object-contain shadow-2xl"
+                                className="w-auto h-auto max-h-[60vh] sm:max-h-[70vh] md:max-h-[75vh] object-contain shadow-2xl"
                             />
                         )}
                         {/* Static Caption (Lightbox View) */}

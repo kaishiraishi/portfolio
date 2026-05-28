@@ -86,7 +86,7 @@ export function getWorkBySlug(slug: string): WorkDetail | null {
       const files = fs.readdirSync(folderPath);
       const matched = files
         .filter(f => f.toLowerCase().startsWith(`${slugLower}_`) && /\.(jpg|jpeg|png|gif|webp|mp4)$/i.test(f))
-        .map(f => `/portfolio/image/${folder}/${f}`);
+        .map(f => `/image/${folder}/${f}`);
         
       if (matched.length > 0) {
         autoImages = autoImages.concat(matched);

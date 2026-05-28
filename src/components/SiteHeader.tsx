@@ -9,7 +9,7 @@ export default function SiteHeader() {
 
   return (
     <header
-      className={`w-full sticky top-0 z-50 py-8 transition-all ${
+      className={`w-full sticky top-0 z-50 py-4 sm:py-6 md:py-8 transition-all ${
         isHome ? "bg-transparent" : "bg-transparent"
       }`}
     >

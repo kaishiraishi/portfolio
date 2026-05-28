@@ -48,9 +48,9 @@ export default function WorksList({ works }: WorksListProps) {
             {works.length === 0 ? (
                 <p className="relative z-10 text-primary/50 font-light text-[10px] tracking-[0.1em] uppercase">No works found.</p>
             ) : (
-                <div className="relative z-10 grid grid-cols-8 gap-4">
+                <div className="relative z-10 grid grid-cols-8 gap-4 px-4 md:px-0">
                     {/* Nav occupies left 4 columns (col 1-4) */}
-                    <nav className="col-span-8 md:col-span-4 flex flex-col" style={{ gap: '16px' }}>
+                    <nav className="col-span-8 md:col-span-4 flex flex-col gap-4">
                         {works.map((work) => (
                             <Link
                                 key={work.slug}
@@ -60,14 +60,13 @@ export default function WorksList({ works }: WorksListProps) {
                                 onMouseLeave={() => setHoveredWork(null)}
                             >
                                 <h2 
-                                    className={`text-4xl sm:text-5xl font-light tracking-tighter group-hover:pl-4 transition-all duration-500 ease-out ${
+                                    className={`whitespace-nowrap text-[2rem] sm:text-4xl md:text-5xl font-light tracking-tighter leading-tight sm:leading-[48px] md:leading-[64px] transition-all duration-500 ease-out md:group-hover:translate-x-4 ${
                                         hoveredWork && hoveredWork.slug !== work.slug ? 'text-black/30' : 'text-primary'
                                     }`} 
-                                    style={{ lineHeight: '64px' }}
                                 >
                                     {work.frontmatter.title}
                                     <span 
-                                        className={`text-[#999999] opacity-80 ml-4 inline-block transform translate-y-[-0.1em] text-xl sm:text-2xl font-extralight tracking-tighter transition-all duration-500 ease-out ${
+                                        className={`text-[#999999] opacity-80 ml-2 sm:ml-4 inline-block transform translate-y-[-0.1em] text-lg sm:text-xl md:text-2xl font-extralight tracking-tighter transition-all duration-500 ease-out ${
                                             hoveredWork && hoveredWork.slug !== work.slug ? 'text-black/30' : ''
                                         }`}
                                     >
