@@ -15,32 +15,42 @@ export default function WorksList({ works }: WorksListProps) {
         <div className="relative min-h-[50vh]">
             {/* Full-screen Background Image on Hover */}
             <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-700 ease-in-out">
-                {works.map((work) => (
-                    <div
-                        key={work.slug}
-                        className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${hoveredWork?.slug === work.slug ? "opacity-60" : "opacity-0"
-                            }`}
-                    >
-                        {work.frontmatter.image && (
-                            /\.(mp4|webm)$/i.test(work.frontmatter.image) ? (
-                                <video
-                                    src={work.frontmatter.image}
-                                    autoPlay
-                                    loop
-                                    muted
-                                    playsInline
-                                    className="w-full h-full object-cover grayscale brightness-125"
-                                />
-                            ) : (
-                                <img
-                                    src={work.frontmatter.image}
-                                    alt=""
-                                    className="w-full h-full object-cover grayscale brightness-125"
-                                />
-                            )
-                        )}
-                    </div>
-                ))}
+                {works.map((work) => {
+                    const isHovered = hoveredWork?.slug === work.slug;
+                    return (
+                        <div
+                            key={work.slug}
+                            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isHovered ? "opacity-60" : "opacity-0"
+                                }`}
+                        >
+                            {work.frontmatter.image && (
+                                /\.(mp4|webm)$/i.test(work.frontmatter.image) ? (
+                                    <video
+                                        src={work.frontmatter.image}
+                                        autoPlay={isHovered}
+                                        loop
+                                        muted
+                                        playsInline
+                                        className="w-full h-full object-cover grayscale brightness-125"
+                                        style={{ willChange: 'opacity' }}
+                                    />
+                                ) : (
+                                    <img
+                                        src={work.frontmatter.image}
+                                        alt=""
+                                        loading="lazy"
+                                        decoding="async"
+                                        className="w-full h-full object-cover grayscale brightness-125 transition-transform duration-1000 scale-105"
+                                        style={{ 
+                                            willChange: 'opacity',
+                                            transform: isHovered ? 'scale(1)' : 'scale(1.05)'
+                                        }}
+                                    />
+                                )
+                            )}
+                        </div>
+                    );
+                })}
                 {/* Subtle overlay to maintain text readability */}
                 <div className={`absolute inset-0 bg-white/20 transition-opacity duration-700 ${hoveredWork ? "opacity-100" : "opacity-0"}`} />
             </div>
