@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { resolveAssetPath } from "@/lib/resolveAssetPath";
 
 export type ImageItem = {
     src: string;
@@ -36,14 +37,14 @@ export default function ImageGallery({
     );
 
     if (mainImage && !isMainImageInList) {
-        allImages.push({ src: mainImage, caption: mainImageCaption });
+        allImages.push({ src: resolveAssetPath(mainImage), caption: mainImageCaption });
     }
     
     images.forEach(img => {
         if (typeof img === "string") {
-            allImages.push({ src: img });
+            allImages.push({ src: resolveAssetPath(img) });
         } else {
-            allImages.push({ src: img.src, caption: img.caption, alt: img.alt });
+            allImages.push({ src: resolveAssetPath(img.src), caption: img.caption, alt: img.alt });
         }
     });
 

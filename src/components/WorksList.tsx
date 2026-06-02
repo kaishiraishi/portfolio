@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Work } from "@/lib/works";
 import Link from "next/link";
+import { resolveAssetPath } from "@/lib/resolveAssetPath";
 
 interface WorksListProps {
     works: Work[];
@@ -17,16 +18,17 @@ export default function WorksList({ works }: WorksListProps) {
             <div className="fixed inset-0 z-0 pointer-events-none transition-all duration-700 ease-in-out">
                 {works.map((work) => {
                     const isHovered = hoveredWork?.slug === work.slug;
+                    const resolvedImage = work.frontmatter.image ? resolveAssetPath(work.frontmatter.image) : undefined;
                     return (
                         <div
                             key={work.slug}
                             className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${isHovered ? "opacity-60" : "opacity-0"
                                 }`}
                         >
-                            {work.frontmatter.image && (
-                                /\.(mp4|webm)$/i.test(work.frontmatter.image) ? (
+                            {resolvedImage && (
+                                /\.(mp4|webm)$/i.test(resolvedImage) ? (
                                     <video
-                                        src={work.frontmatter.image}
+                                        src={resolvedImage}
                                         autoPlay={isHovered}
                                         loop
                                         muted
@@ -36,7 +38,7 @@ export default function WorksList({ works }: WorksListProps) {
                                     />
                                 ) : (
                                     <img
-                                        src={work.frontmatter.image}
+                                        src={resolvedImage}
                                         alt=""
                                         loading="lazy"
                                         decoding="async"

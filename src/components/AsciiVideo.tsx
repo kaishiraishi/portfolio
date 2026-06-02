@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { resolveAssetPath } from "@/lib/resolveAssetPath";
 
 // ─ Theme ─────────────────────────────────────────────────────────────────────
 const THEME = {
@@ -165,7 +166,7 @@ export default function AsciiVideo({
     video.addEventListener("error", onError);
 
     // src を JS から直接セットして load() を明示的に1回だけ呼ぶ
-    video.src = src;
+    video.src = resolveAssetPath(src);
     video.load();
 
     return () => {

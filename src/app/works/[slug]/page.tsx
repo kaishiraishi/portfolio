@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import ImageGallery from "@/components/ImageGallery";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { Metadata } from "next";
+import { resolveAssetPath } from "@/lib/resolveAssetPath";
 
 interface Props {
     params: Promise<{ slug: string }>;
@@ -123,7 +124,23 @@ export default async function WorkDetailPage({ params }: Props) {
 
             {/* Main Description (Japanese) */}
             <div className="prose max-w-none font-light prose-headings:font-normal prose-headings:text-[#777777] prose-h2:text-xl prose-h2:tracking-wider prose-h2:mt-12 prose-h2:mb-2 prose-h2:border-b prose-h2:border-[#777777]/20 prose-h2:pb-1 prose-p:text-[#777777] prose-p:leading-relaxed prose-p:text-sm prose-p:mt-4 prose-p:mb-10 prose-strong:text-[#777777] prose-strong:font-normal prose-ul:text-[#777777] prose-li:text-[#777777]">
-                <MDXRemote source={content} />
+                <MDXRemote 
+                    source={content} 
+                    components={{
+                        img: (props: any) => (
+                            <img 
+                                {...props} 
+                                src={props.src ? resolveAssetPath(props.src) : undefined} 
+                            />
+                        ),
+                        video: (props: any) => (
+                            <video 
+                                {...props} 
+                                src={props.src ? resolveAssetPath(props.src) : undefined} 
+                            />
+                        )
+                    }}
+                />
             </div>
 
             {/* English Description */}

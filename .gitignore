@@ -39,3 +39,8 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# documentation / design systems
+/DESIGN_SYSTEM.md
+/portfolio_summary.md
+/all_text_content.md
