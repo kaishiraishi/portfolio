@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { resolveAssetPath } from "@/lib/resolveAssetPath";
 
 export type ImageItem = {
@@ -27,6 +28,11 @@ export default function ImageGallery({
     itemClassName = "flex flex-col items-start w-full"
 }: ImageGalleryProps) {
     const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     // Normalize images into a single consistent array
     const allImages: ImageItem[] = [];
@@ -116,7 +122,7 @@ export default function ImageGallery({
             </div>
 
             {/* Lightbox Modal */}
-            {currentImg && lightboxIndex !== null && (
+            {mounted && currentImg && lightboxIndex !== null && createPortal(
                 <div 
                     className="fixed inset-0 z-50 bg-white/60 backdrop-blur-xl flex flex-col items-center justify-center p-4 sm:p-6 md:p-12 cursor-zoom-out animate-in fade-in"
                     onClick={() => setLightboxIndex(null)}
@@ -179,7 +185,8 @@ export default function ImageGallery({
                             </p>
                         )}
                     </div>
-                </div>
+                </div>,
+                document.body
             )}
         </>
     );

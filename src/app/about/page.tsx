@@ -52,7 +52,7 @@ export default function AboutPage() {
                 </header>
 
                 {/* ─ Visual ─ */}
-                <div className="col-span-3 md:col-start-6 mt-12 md:mt-24">
+                <div className="col-span-3 md:col-start-6">
                     <div className="scale-75 origin-top-right">
                         <ImageGallery
                             images={[{ src: "/portfolio/image/About/About.jpg", caption: "" }]}

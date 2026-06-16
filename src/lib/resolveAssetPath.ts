@@ -16,10 +16,10 @@ export function resolveAssetPath(src: string): string {
 
   // Strip existing basePath to normalize (handles "/portfolio/image.png" -> "/image.png")
   let cleanSrc = src;
-  if (basePath && cleanSrc.startsWith(basePath + '/')) {
-    cleanSrc = cleanSrc.substring(basePath.length);
+  if (cleanSrc.startsWith('/portfolio/')) {
+    cleanSrc = cleanSrc.substring('/portfolio'.length);
   }
 
-  // Prepend basePath in production
+  // Prepend basePath
   return `${basePath}${cleanSrc}`;
 }

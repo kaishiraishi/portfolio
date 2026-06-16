@@ -30,6 +30,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
+      <head>
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossOrigin="anonymous" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/200.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/300.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/400.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/500.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/600.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gen-interface-jp@0.6.2/cdn/700.css" />
+      </head>
       <body className={`${inter.variable} ${notoSansJP.variable} bg-white text-primary min-h-screen flex flex-col tracking-tight`}>
         <GridOverlay />
         <div className="relative z-10 flex flex-col min-h-screen">

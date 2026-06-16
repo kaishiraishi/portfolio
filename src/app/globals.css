@@ -30,7 +30,7 @@
   --color-primary: #0027ff;
   --color-border: #e6e6e6;
   --color-tertiary: #999999;
-  --font-sans: var(--font-inter), var(--font-noto-jp), system-ui, sans-serif;
+  --font-sans: "Gen Interface JP", var(--font-inter), var(--font-noto-jp), system-ui, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
 }
 
